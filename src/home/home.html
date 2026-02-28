@@ -1,0 +1,47 @@
+---
+layout: layout.html
+css: './src/diary/diary.css'
+js: './src/home/home.js'
+---
+
+<h1>Home<small>ようこそ！</small></h1>
+
+<div class="flex">
+    <section>
+        <h2>Updates</h2>
+        <ul>
+            {% for item in updates.items limit:5 %}
+            <li>
+                {% assign url = item.link | relative %} {{ item.pubDate | date }}:&nbsp;&nbsp;{% if url == "/" %}
+                <span>{{ item.title }}</span>
+                {% else %}
+                <a href="{{ item.link | relative }}">{{ item.title }}</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Tweets</h2>
+        <ul id="tweet-list">
+            <li>　</li>
+            <li>　</li>
+            <li>　</li>
+            <li>　</li>
+            <li>　</li>
+        </ul>
+    </section>
+</div>
+
+<section>
+    <h2>Diary</h2>
+
+    {%- assign posts = collections.posts | reverse -%} {%- for post in posts limit:5 -%}
+    <!---->
+    {% diary post.data.date post.data.image post.data.text %}
+    <!---->
+    {%- endfor -%}
+
+    <a href="/diary/1">More</a>
+</section>

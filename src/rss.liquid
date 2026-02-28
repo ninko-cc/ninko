@@ -1,0 +1,22 @@
+---
+permalink: rss.xml
+---
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>忍狐のホームページ</title>
+        <link>https://ninko.cc/</link>
+        <description>Drawings and diary</description>
+        <atom:link href="https://ninko.cc/rss.xml" rel="self" type="application/rss+xml" />
+
+        {% for item in updates.items limit:10 %}
+            <item>
+                <title>{{ item.title }}</title>
+                <pubDate>{{ item.pubDate }}</pubDate>
+                <link>{{ item.link | xml_escape }}</link>
+                <guid isPermaLink="false">{{ item.title  | append: item.pubDate | md5 }}</guid>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

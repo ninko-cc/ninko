@@ -1,0 +1,10 @@
+img {
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 1279px) {
+    img {
+        width: 200px;
+        height: 250px;
+    }
+}

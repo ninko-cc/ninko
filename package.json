@@ -1,0 +1,25 @@
+{
+    "name": "ninko",
+    "version": "1.0.0",
+    "description": "ninko.cc で公開中の個人ホームページです。",
+    "type": "module",
+    "scripts": {
+        "clean": "rm -fr _site",
+        "serve": "npx @11ty/eleventy --serve",
+        "build": "npx @11ty/eleventy",
+        "deploy": "npx wrangler deploy",
+        "dev": "npx wrangler dev"
+    },
+    "devDependencies": {
+        "@11ty/eleventy": "^3.1.2",
+        "html-minifier-terser": "^7.2.0",
+        "lightningcss": "^1.30.2",
+        "minify-xml": "^4.5.2",
+        "sharp": "^0.34.5",
+        "terser": "^5.44.1",
+        "wrangler": "^4.59.1"
+    },
+    "overrides": {
+        "minimatch": "^10.2.1"
+    }
+}

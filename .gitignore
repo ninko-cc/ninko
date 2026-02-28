@@ -1,0 +1,11 @@
+# nodejs
+/node_modules
+
+# 11ty
+/_site
+
+# cloudflare
+/.wrangler
+
+# ninko
+/images

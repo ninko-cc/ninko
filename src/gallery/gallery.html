@@ -1,0 +1,12 @@
+---
+layout: layout.html
+css: './src/gallery/gallery.css'
+---
+
+<h1>Gallary<small>全力で描いた絵！</small></h1>
+
+<section>
+    {%- for art in collections.artworks reversed -%}
+    <a href="/artwork/?seq={{ art.data.seq }}"><img src="/images/artworks/{{ art.data.thumbnail }}" width="240" height="300" loading="lazy" /></a>
+    {%- endfor -%}
+</section>

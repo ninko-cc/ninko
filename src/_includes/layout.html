@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% default %}
+        <!---->
+        {% loadCSS "./src/global/global.css" %}
+        <!---->
+        {% loadCSS "./src/global/mobile.css" %}
+        <!---->
+        {% if css %} {% for item in css %} {% loadCSS item %} {% endfor %} {% endif %}
+    </head>
+    <body>
+        <nav class="main">
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/links">Links</a></li>
+            </ul>
+        </nav>
+        <main>{{ content }}</main>
+        <footer>
+            <div>© 2025 †忍狐†</div>
+            <div>
+                <a href="https://bsky.app/profile/ninko.cc" target="_blank">Bluesky</a> | <a href="https://github.com/ninko-cc" target="_blank">Github</a> |
+                <a class="mail">Mail</a> | <a href="/rss.xml" target="_blank">RSS</a>
+            </div>
+        </footer>
+        {% if js %} {% for item in js %} {% loadJS item %} {% endfor %} {% endif %}
+        <!---->
+        {% loadJS "./src/global/global.js" %}
+    </body>
+</html>

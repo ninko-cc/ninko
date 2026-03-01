@@ -1,7 +1,7 @@
 {
     "name": "ninko",
     "version": "1.0.0",
-    "description": "ninko.cc で公開中の個人ホームページです。",
+    "description": "ninko.cc で公開中の個人サイトです",
     "type": "module",
     "scripts": {
         "clean": "rm -fr _site",

@@ -1,6 +1,6 @@
 # †忍狐†
 
-[ninko.cc](https://ninko.cc/) で公開中の個人サイトです。
+[ninko.cc](https://ninko.cc/) で公開中の個人サイトです
 
 ## Installation
 

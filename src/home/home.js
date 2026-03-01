@@ -20,11 +20,3 @@
         return `${Math.floor(s / 86400)}日前`;
     }
 })();
-
-(() => {
-    const params = new URLSearchParams(location.search);
-    const date = params.get('date');
-
-    const target = document.querySelector(`[id="${date}"]`);
-    if (target) target.scrollIntoView();
-})();

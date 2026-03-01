@@ -18,7 +18,7 @@ export default (config) => {
     config.addPassthroughCopy('images/buttons');
     config.addPassthroughCopy('src/robots.txt');
 
-    config.addShortcode('loadCSS', function (path) {
+    config.addShortcode('injectCSS', function (path) {
         const content = fs.readFileSync(path, 'utf8');
         const minified = minifyCSS({
             filename: path,
@@ -29,13 +29,13 @@ export default (config) => {
         return `<style>${minified}</style>`;
     });
 
-    config.addShortcode('loadJS', async function (path) {
+    config.addShortcode('injectJS', async function (path) {
         const content = fs.readFileSync(path, 'utf8');
         const minified = (await minifyJS(content)).code;
         return `<script>${minified}</script>`;
     });
 
-    config.addShortcode('loadArtworks', function (artworks) {
+    config.addShortcode('injectArtworks', function (artworks) {
         const data = JSON.stringify(
             artworks.map((item) => [item.data.title, item.data.category, item.data.date, item.data.filename]),
         );
@@ -62,7 +62,7 @@ export default (config) => {
     config.addShortcode('default', () => {
         return `
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
         <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
         <meta name="pinterest" content="nopin" />
         <link rel="alternate" type="application/rss+xml" title="忍狐のホームページ" href="https://ninko.cc/rss.xml" />

@@ -7,22 +7,17 @@ permalink: /index.html
     <head>
         {% default %}
         <!---->
-        {% loadCSS "./src/global/global.css" %}
+        {% injectCSS "./src/global/global.css" %}
         <!---->
-        {% loadCSS "./src/global/mobile.css" %}
-        <!---->
-        {% loadCSS "./src/index/index.css" %}
+        {% injectCSS "./src/index/index.css" %}
     </head>
     <body>
         <h1>忍狐のホームページ</h1>
         <p>
             Thank you for visiting my site.<br />
-            This is where I share my drawings and diary.<br />
+            This is where I post my drawings and diary.<br />
         </p>
-        <ul>
-            <li>Contains NSFW content</li>
-            <li>Best viewed on desktop</li>
-        </ul>
+        <p>This site contains NSFW content</p>
         <a href="/home">
             <img src="/images/buttons/20260210_button.avif" width="200" height="40" alt="Enter" />
         </a>

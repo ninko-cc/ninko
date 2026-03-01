@@ -1,6 +1,4 @@
-const params = new URLSearchParams(location.search);
-const seq = params.get('seq');
-
+const seq = location.hash.slice(1);
 const art = artworks[seq];
 
 const h1 = document.querySelector('h1');

@@ -1,11 +1,11 @@
-section.diary {
-    display: grid;
-    grid-template-columns: 265px 1fr;
-    grid-template-rows: 1.5em 1fr;
-    margin-bottom: 1rem;
-}
-
 @scope (section.diary) {
+    :scope {
+        display: grid;
+        grid-template-columns: 265px 1fr;
+        grid-template-rows: 1.5em 1fr;
+        margin-bottom: 1rem;
+    }
+
     header {
         grid-column: 2 / 3;
         margin: 0;
@@ -22,11 +22,4 @@ section.diary {
 nav.pagination {
     display: flex;
     gap: 0.5em;
-}
-
-@media screen and (max-width: 1279px) {
-    section.diary {
-        display: flex;
-        flex-direction: column;
-    }
 }

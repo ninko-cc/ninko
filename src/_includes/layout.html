@@ -3,11 +3,9 @@
     <head>
         {% default %}
         <!---->
-        {% loadCSS "./src/global/global.css" %}
+        {% injectCSS "./src/global/global.css" %}
         <!---->
-        {% loadCSS "./src/global/mobile.css" %}
-        <!---->
-        {% if css %} {% for item in css %} {% loadCSS item %} {% endfor %} {% endif %}
+        {% if css %} {% for item in css %} {% injectCSS item %} {% endfor %} {% endif %}
     </head>
     <body>
         <nav class="main">
@@ -23,11 +21,11 @@
             <div>© 2025 †忍狐†</div>
             <div>
                 <a href="https://bsky.app/profile/ninko.cc" target="_blank">Bluesky</a> | <a href="https://github.com/ninko-cc" target="_blank">Github</a> |
-                <a class="mail">Mail</a> | <a href="/rss.xml" target="_blank">RSS</a>
+                <a onclick="mail()">Mail</a> | <a href="/rss.xml" target="_blank">RSS</a>
             </div>
         </footer>
-        {% if js %} {% for item in js %} {% loadJS item %} {% endfor %} {% endif %}
+        {% injectJS "./src/global/global.js" %}
         <!---->
-        {% loadJS "./src/global/global.js" %}
+        {% if js %} {% for item in js %} {% injectJS item %} {% endfor %} {% endif %}
     </body>
 </html>

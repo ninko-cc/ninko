@@ -17,20 +17,6 @@ body {
     background-color: var(--white);
 }
 
-nav.main {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-    padding-top: 4.5rem;
-    font-size: 1.1em;
-    color: var(--gold);
-    border-right: 1px solid var(--gold);
-}
-
-main {
-    grid-column: 2 / 3;
-    padding: 1rem 2rem;
-}
-
 footer {
     display: flex;
     flex-direction: column;
@@ -79,7 +65,16 @@ th::after {
     gap: 3rem;
 }
 
-@scope (nav) {
+@scope (nav.main) {
+    :scope {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+        padding-top: 4.5rem;
+        font-size: 1.1em;
+        color: var(--gold);
+        border-right: 1px solid var(--gold);
+    }
+
     ul {
         display: grid;
         justify-content: center;
@@ -93,6 +88,11 @@ th::after {
 }
 
 @scope (main) {
+    :scope {
+        grid-column: 2 / 3;
+        padding: 1rem 2rem;
+    }
+
     ul {
         padding-left: 1rem;
     }

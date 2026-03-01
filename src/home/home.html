@@ -12,7 +12,7 @@ js: './src/home/home.js'
         <ul>
             {% for item in updates.items limit:5 %}
             <li>
-                {% assign url = item.link | relative %} {{ item.pubDate | date }}:&nbsp;&nbsp;{% if url == "/" %}
+                {% assign url = item.link | relative %} {{ item.pubDate | date }}:&nbsp;{% if url == "/" %}
                 <span>{{ item.title }}</span>
                 {% else %}
                 <a href="{{ item.link | relative }}">{{ item.title }}</a>

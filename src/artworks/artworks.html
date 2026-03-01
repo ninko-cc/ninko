@@ -1,0 +1,12 @@
+---
+layout: layout.html
+pagination:
+    data: collections.artworks
+    size: 1
+    alias: art
+permalink: '/artworks/{{ pagination.pageNumber }}/index.html'
+---
+
+<h1>{{ art.data.title }}<small>{{ art.data.category }} / {{ art.data.date }}</small></h1>
+
+<img width="640" height="800" src="/images/artworks/{{ art.data.filename }}" />

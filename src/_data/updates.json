@@ -2,7 +2,7 @@
     "items": [
         {
             "title": "Study of morning",
-            "link": "https://ninko.cc/artwork/#12",
+            "link": "https://ninko.cc/artworks/12/",
             "pubDate": "Fri, 27 Feb 2026 20:39:01 +0900"
         },
         {
@@ -12,7 +12,7 @@
         },
         {
             "title": "Study of shade",
-            "link": "https://ninko.cc/artwork/#11",
+            "link": "https://ninko.cc/artworks/11/",
             "pubDate": "Sat, 21 Feb 2026 19:55:28 +0900"
         },
         {
@@ -31,18 +31,18 @@
             "pubDate": "Tue, 10 Feb 2026 19:00:00 +0900"
         },
         {
-            "title": "Study of morning",
-            "link": "https://ninko.cc/artwork/#10",
+            "title": "Study of beach",
+            "link": "https://ninko.cc/artworks/10/",
             "pubDate": "Tue, 10 Feb 2026 18:30:00 +0900"
         },
         {
             "title": "Fan art of Hibari",
-            "link": "https://ninko.cc/artwork/#9",
+            "link": "https://ninko.cc/artworks/9/",
             "pubDate": "Sun, 1 Feb 2026 23:30:00 +0900"
         },
         {
             "title": "Fan art of Hikage",
-            "link": "https://ninko.cc/artwork/#8",
+            "link": "https://ninko.cc/artworks/8/",
             "pubDate": "Mon, 19 Jan 2026 19:40:00 +0900"
         },
         {
@@ -62,7 +62,7 @@
         },
         {
             "title": "Fan art of Hibari",
-            "link": "https://ninko.cc/artwork/#7",
+            "link": "https://ninko.cc/artworks/7/",
             "pubDate": "Mon, 29 Dec 2025 00:00:00 +0900"
         }
     ]

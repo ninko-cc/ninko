@@ -35,13 +35,6 @@ export default (config) => {
         return `<script>${minified}</script>`;
     });
 
-    config.addShortcode('injectArtworks', function (artworks) {
-        const data = JSON.stringify(
-            artworks.map((item) => [item.data.title, item.data.category, item.data.date, item.data.filename]),
-        );
-        return `<script>const artworks = ${data};</script>`;
-    });
-
     config.addShortcode('button', (src, href) => {
         const content = href
             ? `<a href="${href}" target="_blank"><img src="${src}" width="200" height="40" loading="lazy" /></a>`

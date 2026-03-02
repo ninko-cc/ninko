@@ -9,12 +9,29 @@
     </head>
     <body>
         <nav class="main">
-            <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/gallery">Gallery</a></li>
-                <li><a href="/links">Links</a></li>
-            </ul>
+            <section>
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/gallery">Gallery</a></li>
+                    <li><a href="/links">Links</a></li>
+                </ul>
+            </section>
+            <section class="updates">
+                <header>Updates</header>
+                <ul>
+                    {% for item in updates.items limit:5 %}
+                    <li>
+                        <span>{{ item.pubDate | date }}</span>
+                        {% assign url = item.link | relative %} {% if url == "/" %}
+                        <span>{{ item.title }}</span>
+                        {% else %}
+                        <a href="{{ item.link | relative }}">{{ item.title }}</a>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
         </nav>
         <main>{{ content }}</main>
         <footer>

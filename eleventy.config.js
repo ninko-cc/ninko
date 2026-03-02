@@ -64,13 +64,10 @@ export default (config) => {
     });
 
     config.addFilter('date', (string) => {
-        return new Date(string)
-            .toLocaleDateString('ja-JP', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-            })
-            .replaceAll('/', '-');
+        return new Date(string).toLocaleDateString('ja-JP', {
+            month: '2-digit',
+            day: '2-digit',
+        });
     });
 
     config.addFilter('relative', (href) => {

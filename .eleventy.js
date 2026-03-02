@@ -69,31 +69,45 @@ export default (config) => {
                 };
             }
 
-            switch (item.data.category) {
+            const { title, category } = item.data;
+
+            switch (category) {
                 case 'original':
-                    item.data.text = `${item.data.title}.`;
+                    item.data.rss = { title: title };
+                    item.data.text = `${title}.`;
                     break;
                 case 'fanart':
-                    item.data.text = `Fan art of ${item.data.title}.`;
+                    item.data.rss = { title: `Fan art of ${title}` };
+                    item.data.text = item.data.rss.title + '.';
                     break;
                 case 'study':
-                    item.data.text = `Study of ${item.data.title.toLowerCase()}.`;
+                    item.data.rss = { title: `Study of ${title.toLowerCase()}` };
+                    item.data.text = item.data.rss.title + '.';
                     break;
                 case 'doodle':
-                    const formatter = new Intl.DateTimeFormat('ja-JP');
-                    item.data.title = `Diary updated (${formatter.format(item.date)})`;
+                    const formatter = new Intl.DateTimeFormat('ja-JP', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                    });
+                    const date = formatter.format(item.date).replaceAll('/', '-');
+                    item.data.title = `Diary updated: ${date}`;
+                    item.data.rss = { title: item.data.title };
                     item.data.thumbnail = {
                         image: item.data.image,
                         width: '236',
                         height: '236',
                     };
                     break;
+                case 'textonly':
+                    item.data.rss = { title: ninko.head(item.data.text) };
+                    break;
             }
 
             item.data.id = index;
             item.data.path = `/home/#${index}`;
-            item.data.head = item.data.text.replace(/<[^>]*>?/gm, '').slice(0, 30);
-            item.data.hash = crypto
+            item.data.head = ninko.head(item.data.text);
+            item.data.rss.hash = crypto
                 .createHash('md5')
                 .update(item.data.title + item.data.date)
                 .digest('hex');

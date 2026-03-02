@@ -25,4 +25,9 @@ export default {
         console.log(`[ninko] Copying ${outputPath} from ${inputPath}`);
         await fs.promises.copyFile(inputPath, outputPath);
     },
+
+    head(text, length = 30) {
+        const head = text.replace(/<[^>]*>?/gm, '').slice(0, length);
+        return head.length == length ? head.slice(0, -1) + '…' : head;
+    },
 };

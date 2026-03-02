@@ -13,10 +13,10 @@ permalink: rss.xml
         {% assign posts = collections.posts | reverse %}
         {% for post in posts limit:10 %}
             <item>
-                <title>{{ post.data.title }}</title>
+                <title>{{ post.data.rss.title }}</title>
                 <pubDate>{{ post.date | rfc822 }}</pubDate>
                 <link>{{ "https://ninko.cc" | append: post.data.path }}</link>
-                <guid isPermaLink="false">{{ post.data.hash }}</guid>
+                <guid isPermaLink="false">{{ post.data.rss.hash }}</guid>
                 <description>{{ post.data.head }}</description>
             </item>
         {% endfor %}

@@ -77,7 +77,7 @@ export default (config) => {
                     item.data.text = `Fan art of ${item.data.title}.`;
                     break;
                 case 'study':
-                    item.data.text = `${item.data.category} of ${item.data.title.toLowerCase()}.`;
+                    item.data.text = `Study of ${item.data.title.toLowerCase()}.`;
                     break;
                 case 'doodle':
                     const formatter = new Intl.DateTimeFormat('ja-JP');

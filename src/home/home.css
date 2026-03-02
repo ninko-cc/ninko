@@ -14,8 +14,8 @@
     div.thumbnail {
         text-align: center;
         align-content: center;
-        width: 250px;
-        height: 250px;
+        width: 236px;
+        height: 236px;
         color: var(--gold);
         background-color: var(--black);
     }

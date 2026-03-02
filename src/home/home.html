@@ -1,16 +1,49 @@
 ---
 layout: layout.html
-css: './src/diary/diary.css'
+css: './src/home/home.css'
+js: './src/home/home.js'
+pagination:
+    data: collections.posts
+    size: 5
+    reverse: true
 ---
 
+{% if pagination.pageNumber == 0 %}
 <h1>Home<small>ようこそ！</small></h1>
+{% else %}
+<h1>Archives<small>過去の投稿</small></h1>
+{% endif %}
 
 <section>
-    {%- assign posts = collections.posts | reverse -%} {%- for post in posts limit:5 -%}
-    <!---->
-    {% diary post.data.date post.data.image post.data.text %}
-    <!---->
-    {%- endfor -%}
+    {% for post in pagination.items %}
+    <section class="post" id="{{ post.data.id }}">
+        <header>{{ post.date | date: "%Y-%m-%d" }}</header>
+        {% if post.data.thumbnail %}
+        <img
+            class="thumbnail"
+            src="/images/artworks/{{ post.data.thumbnail.image }}"
+            width="{{ post.data.thumbnail.width }}"
+            height="{{ post.data.thumbnail.height }}"
+            loading="lazy"
+        />
+        {% else %}
+        <div class="thumbnail">TEXT ONLY</div>
+        {% endif %}
+        <p>{{ post.data.text }}</p>
+    </section>
+    {% endfor %}
 
-    <a href="/diary/1">More</a>
+    <nav class="pagination">
+        {% if pagination.href.previous %}
+        <a href="{{ pagination.href.previous }}">Prev</a>
+        {% endif %}
+        <!---->
+        {% if pagination.href.previous and pagination.href.next %}
+        <span>|</span>
+        {% endif %}
+        <!---->
+        {% if pagination.href.next %}
+        <a href="{{ pagination.href.next }}">Next</a>
+        {% endif %}
+    </nav>
 </section>

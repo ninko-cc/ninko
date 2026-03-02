@@ -1,15 +1,15 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <!-- prettier-ignore -->
         {% default %}
-        <!---->
         {% injectCSS "./src/global/global.css" %}
-        <!---->
         {% if css %} {% for item in css %} {% injectCSS item %} {% endfor %} {% endif %}
     </head>
     <body>
         <nav class="main">
-            <section>
+            <section class="menu">
+                <header>Menu</header>
                 <ul>
                     <li><a href="/home">Home</a></li>
                     <li><a href="/about">About</a></li>
@@ -20,14 +20,12 @@
             <section class="updates">
                 <header>Updates</header>
                 <ul>
-                    {% for item in updates.items limit:5 %}
+                    <!-- prettier-ignore -->
+                    {% assign posts = collections.posts | reverse %}
+                    {% for post in posts limit:5 %}
                     <li>
-                        <span>{{ item.pubDate | date }}</span>
-                        {% assign url = item.link | relative %} {% if url == "/" %}
-                        <span>{{ item.title }}</span>
-                        {% else %}
-                        <a href="{{ item.link | relative }}">{{ item.title }}</a>
-                        {% endif %}
+                        <span>{{ post.date | date: "%m/%d" }}</span>
+                        <a href="{{ post.data.path }}">{{ post.data.head }}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -41,8 +39,8 @@
                 <a onclick="mail()">Mail</a> | <a href="/rss.xml" target="_blank">RSS</a>
             </div>
         </footer>
+        <!-- prettier-ignore -->
         {% injectJS "./src/global/global.js" %}
-        <!---->
         {% if js %} {% for item in js %} {% injectJS item %} {% endfor %} {% endif %}
     </body>
 </html>

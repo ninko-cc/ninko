@@ -2,7 +2,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    text-align: center;
+    gap: 2.5rem;
     padding: 8rem 0;
 }
 
@@ -12,5 +13,4 @@ h1 {
 
 p {
     margin: 0;
-    text-align: center;
 }

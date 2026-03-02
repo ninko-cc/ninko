@@ -5,21 +5,23 @@ permalink: /index.html
 <!doctype html>
 <html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- prettier-ignore -->
         {% default %}
-        <!---->
         {% injectCSS "./src/global/global.css" %}
-        <!---->
         {% injectCSS "./src/index/index.css" %}
     </head>
-    <body>
+    <body class="index">
         <h1>忍狐のホームページ</h1>
         <p>
-            Thank you for visiting my site.<br />
-            This is where I post my drawings and diary.<br />
+            Thank you for visiting my site!<br />
+            This is the personal website of †忍狐†.
         </p>
-        <p>This site contains NSFW content</p>
-        <a href="/home">
-            <img src="/images/buttons/20260210_button.avif" width="200" height="40" alt="Enter" />
-        </a>
+        <div>
+            <a href="/home">
+                <img src="/images/buttons/20260210_button.avif" width="200" height="40" alt="Enter" />
+            </a>
+            <p>⚠︎ NSFW</p>
+        </div>
     </body>
 </html>

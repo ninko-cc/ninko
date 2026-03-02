@@ -1,0 +1,153 @@
+import fs from 'fs';
+import path from 'path';
+import crypto from 'crypto';
+
+import { minify as minifyHTML } from 'html-minifier-terser';
+import { minify as minifyXML } from 'minify-xml';
+import { minify as minifyJS } from 'terser';
+import { transform as minifyCSS } from 'lightningcss';
+
+import ninko from './ninko.js';
+
+export default (config) => {
+    config.setInputDirectory('src');
+
+    config.addWatchTarget('src/**/*.css');
+    config.addWatchTarget('src/**/*.js');
+
+    config.addPassthroughCopy('images/buttons');
+    config.addPassthroughCopy('src/robots.txt');
+
+    config.addShortcode('injectCSS', function (path) {
+        const content = fs.readFileSync(path, 'utf8');
+        const minified = minifyCSS({
+            filename: path,
+            code: Buffer.from(content),
+            minify: true,
+            sourceMap: false,
+        }).code;
+        return `<style>${minified}</style>`;
+    });
+
+    config.addShortcode('injectJS', async function (path) {
+        const content = fs.readFileSync(path, 'utf8');
+        const minified = (await minifyJS(content)).code;
+        return `<script>${minified}</script>`;
+    });
+
+    config.addShortcode('button', (src, href) => {
+        const content = href
+            ? `<a href="${href}" target="_blank"><img class="button" src="${src}" width="200" height="40" loading="lazy" /></a>`
+            : `<img class="button" src="${src}" width="200" height="40" loading="lazy" class="not-found" />`;
+        return `<span>${content}</span>`;
+    });
+
+    config.addShortcode('default', () => {
+        return `
+        <meta charset="UTF-8" />
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+        <meta name="pinterest" content="nopin" />
+        <link rel="alternate" type="application/rss+xml" title="忍狐のホームページ" href="https://ninko.cc/rss.xml" />
+        <title>忍狐のホームページ</title>
+        `;
+    });
+
+    config.addFilter('rfc822', (date) => {
+        return new Date(date).toUTCString();
+    });
+
+    config.addCollection('posts', function (api) {
+        let seq = 0;
+
+        return api.getFilteredByTag('posts').map((item, index) => {
+            if (item.data.tags.includes('artworks')) {
+                item.data.seq = seq++;
+                item.data.thumbnail = {
+                    image: ninko.addSuffix(item.data.image),
+                    width: '236',
+                    height: '295',
+                };
+            }
+
+            switch (item.data.category) {
+                case 'original':
+                    item.data.text = `${item.data.title}.`;
+                    break;
+                case 'fanart':
+                    item.data.text = `Fan art of ${item.data.title}.`;
+                    break;
+                case 'study':
+                    item.data.text = `${item.data.category} of ${item.data.title.toLowerCase()}.`;
+                    break;
+                case 'doodle':
+                    const formatter = new Intl.DateTimeFormat('ja-JP');
+                    item.data.title = `Diary updated (${formatter.format(item.date)})`;
+                    item.data.thumbnail = {
+                        image: item.data.image,
+                        width: '236',
+                        height: '236',
+                    };
+                    break;
+            }
+
+            item.data.id = index;
+            item.data.path = `/home/#${index}`;
+            item.data.head = item.data.text.replace(/<[^>]*>?/gm, '').slice(0, 30);
+            item.data.hash = crypto
+                .createHash('md5')
+                .update(item.data.title + item.data.date)
+                .digest('hex');
+
+            return item;
+        });
+    });
+
+    config.addTransform('HTML圧縮', async function (content) {
+        if ((this.page.outputPath || '').endsWith('.html')) {
+            return minifyHTML(content, {
+                collapseWhitespace: true,
+                useShortDoctype: true,
+                removeRedundantAttributes: true,
+                removeComments: true,
+            });
+        }
+        return content;
+    });
+
+    config.addTransform('XML圧縮', async function (content) {
+        if ((this.page.outputPath || '').endsWith('.xml')) {
+            return minifyXML(content, {
+                shortenNamespaces: false,
+            });
+        }
+        return content;
+    });
+
+    config.addTransform('JSON圧縮', async function (content) {
+        if ((this.page.outputPath || '').endsWith('.json')) {
+            return JSON.stringify(JSON.parse(content));
+        }
+        return content;
+    });
+
+    config.on('eleventy.after', async () => {
+        const inputDir = './images/artworks';
+        const outputDir = `./_site/images/artworks`;
+
+        fs.mkdirSync(outputDir, { recursive: true });
+
+        fs.readdirSync(inputDir).forEach((filename) => {
+            const { name, ext } = path.parse(filename);
+            const inputPath = path.join(inputDir, filename);
+            const outputPath = path.join(outputDir, name + ext);
+            const format = ext.slice(1);
+
+            if (/fanart|original|study/.test(name)) {
+                ninko.resize(inputPath, outputPath, 640, 800, format, 100, false);
+                ninko.resize(inputPath, ninko.addSuffix(outputPath), 240, 300, format, 60, false);
+            }
+            if (/doodle/.test(name)) ninko.resize(inputPath, outputPath, 250, 250, format, 70, false);
+            if (/animation/.test(name)) ninko.resize(inputPath, outputPath, 250, 250, format, 70, true);
+        });
+    });
+};

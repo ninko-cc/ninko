@@ -1,6 +1,8 @@
 :root {
     --black: #26251d;
-    --white: #fafafa;
+    --white: #ffffff;
+    --lightgray: #fafafa;
+    --ivory: #fffff0;
     --gold: #ccc4a2;
     --brown: #4f4f2f;
     --navy: #223a70;
@@ -8,13 +10,13 @@
 
 body {
     display: grid;
-    grid-template-columns: 160px 1fr;
+    grid-template-columns: 190px 1fr;
     grid-template-rows: 1fr;
     width: 1200px;
     min-height: 100vh;
     margin: 0 auto;
     color: var(--brown);
-    background-color: var(--white);
+    background-color: var(--lightgray);
 }
 
 footer {
@@ -60,11 +62,6 @@ th::after {
     content: ':';
 }
 
-.flex {
-    display: flex;
-    gap: 3rem;
-}
-
 @scope (nav.main) {
     :scope {
         display: flex;
@@ -72,7 +69,7 @@ th::after {
         gap: 2.5rem;
         grid-column: 1 / 2;
         grid-row: 1 / 3;
-        padding-top: 4.5rem;
+        padding-top: 3.5rem;
         font-size: 1.1em;
         border-right: 1px solid var(--gold);
     }
@@ -81,17 +78,16 @@ th::after {
         display: grid;
         justify-content: center;
         gap: 1rem;
-        padding: 0;
+        padding: 0.5em 0;
     }
 
     li::marker {
         content: '';
     }
 
-    @scope (section.updates) {
+    @scope (section) {
         :scope {
             margin: 0 1em;
-            font-size: 0.9em;
         }
 
         header {
@@ -99,9 +95,20 @@ th::after {
             border-bottom: 1px solid var(--gold);
             padding-bottom: 0.5em;
         }
+    }
 
+    @scope (section.updates) {
         li {
             font-size: 0.9em;
+            display: -webkit-box;
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        li > span {
+            margin-right: 0.25em;
         }
     }
 }
@@ -119,5 +126,15 @@ th::after {
     ul:has(ul) {
         display: grid;
         gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 1279px) {
+    body.index {
+        width: 100%;
+    }
+
+    html:not(:has(body.index)) {
+        font-size: 26px;
     }
 }

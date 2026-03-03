@@ -153,4 +153,11 @@ th::after {
     html:not(:has(body.index)) {
         font-size: 26px;
     }
+
+    @scope (section.updates) {
+        li {
+            line-clamp: 3;
+            -webkit-line-clamp: 3;
+        }
+    }
 }

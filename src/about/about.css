@@ -16,4 +16,8 @@
         object-fit: contain;
         object-position: left;
     }
+
+    h2 {
+        margin-top: 0;
+    }
 }

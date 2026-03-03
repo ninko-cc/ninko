@@ -18,7 +18,9 @@ pagination:
     {% for post in pagination.items %}
     <section class="post" id="{{ post.data.id }}">
         <header>{{ post.date | date: "%Y-%m-%d" }}</header>
-        {% if post.data.thumbnail %}
+        {% if post.data.category == "textonly" %}
+        <img class="thumbnail" width="{{ post.data.thumbnail.width }}" height="{{ post.data.thumbnail.height }}" alt="{{ post.data.thumbnail.alt }}" />
+        {% else %}
         <img
             class="thumbnail"
             src="/images/artworks/{{ post.data.thumbnail.image }}"
@@ -26,8 +28,6 @@ pagination:
             height="{{ post.data.thumbnail.height }}"
             loading="lazy"
         />
-        {% else %}
-        <div class="thumbnail">TEXT ONLY</div>
         {% endif %}
         <p>{{ post.data.text }}</p>
     </section>

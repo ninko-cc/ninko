@@ -62,6 +62,8 @@ export default (config) => {
         return api.getFilteredByTag('posts').map((item, index) => {
             if (item.data.tags.includes('artworks')) {
                 item.data.seq = seq++;
+                item.data.width = 640;
+                item.data.height = 800;
                 item.data.thumbnail = {
                     image: ninko.addSuffix(item.data.image),
                     width: '236',
@@ -101,6 +103,11 @@ export default (config) => {
                     break;
                 case 'textonly':
                     item.data.rss = { title: ninko.head(item.data.text) };
+                    item.data.thumbnail = {
+                        alt: 'TEST ONLY',
+                        width: '236',
+                        height: '236',
+                    };
                     break;
             }
 

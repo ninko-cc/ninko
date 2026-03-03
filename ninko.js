@@ -2,16 +2,43 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
-export default {
-    THUMBNAIL_SUFFIX: '-thumbnail',
-
-    addSuffix(filePath) {
-        const { dir, name, ext } = path.parse(filePath);
-        return path.join(dir, `${name}${this.THUMBNAIL_SUFFIX}${ext}`);
+const ninko = {
+    artwork: {
+        width: 640,
+        height: 800,
+        quality: 100,
+        resize: resize,
+        thumbnail: {
+            width: 236,
+            height: 295,
+            resize: resize,
+        },
+    },
+    doodle: {
+        width: 250,
+        height: 250,
+        resize: resize,
+        thumbnail: {
+            width: 236,
+            height: 236,
+        },
+    },
+    animation: {
+        width: 250,
+        height: 250,
+        animated: true,
+        resize: resize,
     },
 
-    async resize(inputPath, outputPath, width, height, format, quality, animated) {
+    addSuffix(filePath, suffix = '-thumbnail') {
+        return filePath.replace(/(\.[^.]+)$/, `${suffix}$1`);
+    },
+
+    async transform(inputPath, outputPath, width, height, quality = 70, animated = false) {
         if (fs.existsSync(outputPath)) return;
+
+        const { ext } = path.parse(outputPath);
+        const format = ext.slice(1);
 
         const s = sharp(inputPath, { animated: animated });
         const meta = await s.metadata();
@@ -31,3 +58,9 @@ export default {
         return head.length == length ? head.slice(0, -1) + '…' : head;
     },
 };
+
+function resize(inputPath, outputPath) {
+    ninko.transform(inputPath, outputPath, this.width, this.height, this.quality, this.animated);
+}
+
+export default ninko;

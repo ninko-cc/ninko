@@ -62,12 +62,12 @@ export default (config) => {
         return api.getFilteredByTag('posts').map((item, index) => {
             if (item.data.tags.includes('artworks')) {
                 item.data.seq = seq++;
-                item.data.width = 640;
-                item.data.height = 800;
+                item.data.width = ninko.artwork.width;
+                item.data.height = ninko.artwork.height;
                 item.data.thumbnail = {
                     image: ninko.addSuffix(item.data.image),
-                    width: '236',
-                    height: '295',
+                    width: ninko.artwork.thumbnail.width,
+                    height: ninko.artwork.thumbnail.height,
                 };
             }
 
@@ -97,8 +97,8 @@ export default (config) => {
                     item.data.rss = { title: item.data.title };
                     item.data.thumbnail = {
                         image: item.data.image,
-                        width: '236',
-                        height: '236',
+                        width: ninko.doodle.thumbnail.width,
+                        height: ninko.doodle.thumbnail.height,
                     };
                     break;
                 case 'textonly':
@@ -151,24 +151,22 @@ export default (config) => {
         return content;
     });
 
-    config.on('eleventy.after', async () => {
+    config.on('eleventy.after', async ({ directories }) => {
         const inputDir = './images/artworks';
-        const outputDir = `./_site/images/artworks`;
+        const outputDir = path.join(directories.output, inputDir);
 
         fs.mkdirSync(outputDir, { recursive: true });
 
         fs.readdirSync(inputDir).forEach((filename) => {
-            const { name, ext } = path.parse(filename);
             const inputPath = path.join(inputDir, filename);
-            const outputPath = path.join(outputDir, name + ext);
-            const format = ext.slice(1);
+            const outputPath = path.join(outputDir, filename);
 
-            if (/fanart|original|study/.test(name)) {
-                ninko.resize(inputPath, outputPath, 640, 800, format, 100, false);
-                ninko.resize(inputPath, ninko.addSuffix(outputPath), 240, 300, format, 60, false);
+            if (/fanart|original|study/.test(filename)) {
+                ninko.artwork.resize(inputPath, outputPath);
+                ninko.artwork.thumbnail.resize(inputPath, ninko.addSuffix(outputPath));
             }
-            if (/doodle/.test(name)) ninko.resize(inputPath, outputPath, 250, 250, format, 70, false);
-            if (/animation/.test(name)) ninko.resize(inputPath, outputPath, 250, 250, format, 70, true);
+            if (/doodle/.test(filename)) ninko.doodle.resize(inputPath, outputPath);
+            if (/animation/.test(filename)) ninko.animation.resize(inputPath, outputPath);
         });
     });
 };

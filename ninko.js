@@ -9,25 +9,25 @@ const ninko = {
         quality: 100,
         resize: resize,
         thumbnail: {
-            width: 236,
-            height: 295,
+            width: 300,
+            height: 375,
             resize: resize,
         },
     },
     doodle: {
-        width: 250,
-        height: 250,
-        resize: resize,
         thumbnail: {
-            width: 236,
-            height: 236,
+            width: 300,
+            height: 300,
+            resize: resize,
         },
     },
     animation: {
-        width: 250,
-        height: 250,
-        animated: true,
-        resize: resize,
+        thumbnail: {
+            width: 300,
+            height: 300,
+            animated: true,
+            resize: resize,
+        },
     },
 
     addSuffix(filePath, suffix = '-thumbnail') {

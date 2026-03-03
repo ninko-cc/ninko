@@ -16,10 +16,15 @@ pagination:
 
 <section>
     {% for post in pagination.items %}
+
     <section class="post" id="{{ post.data.id }}">
         <header>{{ post.date | date: "%Y-%m-%d" }}</header>
-        {% if post.data.category == "textonly" %}
-        <img class="thumbnail" width="{{ post.data.thumbnail.width }}" height="{{ post.data.thumbnail.height }}" alt="{{ post.data.thumbnail.alt }}" />
+
+        {% if post.data.category == "textonly" %}<!---->
+
+        {% capture style %} style="width: {{ post.data.thumbnail.width }}px; height: {{ post.data.thumbnail.height }}px;" {% endcapture %}
+        <div class="thumbnail" {{style }}>{{ post.data.thumbnail.alt }}</div>
+
         {% else %}
         <img
             class="thumbnail"
@@ -29,8 +34,10 @@ pagination:
             loading="lazy"
         />
         {% endif %}
+
         <p>{{ post.data.text }}</p>
     </section>
+
     {% endfor %}
 
     <nav class="pagination">

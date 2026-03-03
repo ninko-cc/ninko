@@ -104,9 +104,9 @@ export default (config) => {
                 case 'textonly':
                     item.data.rss = { title: ninko.head(item.data.text) };
                     item.data.thumbnail = {
-                        alt: 'TEST ONLY',
-                        width: '236',
-                        height: '236',
+                        alt: 'TEXT ONLY',
+                        width: ninko.doodle.thumbnail.width,
+                        height: ninko.doodle.thumbnail.height,
                     };
                     break;
             }
@@ -165,8 +165,8 @@ export default (config) => {
                 ninko.artwork.resize(inputPath, outputPath);
                 ninko.artwork.thumbnail.resize(inputPath, ninko.addSuffix(outputPath));
             }
-            if (/doodle/.test(filename)) ninko.doodle.resize(inputPath, outputPath);
-            if (/animation/.test(filename)) ninko.animation.resize(inputPath, outputPath);
+            if (/doodle/.test(filename)) ninko.doodle.thumbnail.resize(inputPath, outputPath);
+            if (/animation/.test(filename)) ninko.animation.thumbnail.resize(inputPath, outputPath);
         });
     });
 };

@@ -38,7 +38,7 @@ export default (config) => {
     config.addShortcode('button', (src, href) => {
         const content = href
             ? `<a href="${href}" target="_blank"><img class="button" src="${src}" width="200" height="40" loading="lazy" /></a>`
-            : `<img class="button" src="${src}" width="200" height="40" loading="lazy" class="not-found" />`;
+            : `<img class="button not-found" src="${src}" width="200" height="40" loading="lazy" />`;
         return `<span>${content}</span>`;
     });
 

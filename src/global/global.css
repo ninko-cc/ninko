@@ -15,6 +15,7 @@ body {
     width: 1200px;
     min-height: 100vh;
     margin: 0 auto;
+    font-family: serif;
     color: var(--brown);
     background-color: var(--lightgray);
 }

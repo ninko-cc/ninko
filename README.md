@@ -16,9 +16,10 @@ $ npm install
 $ npm run [command]
 ```
 
-| Command | Description                               |
-| ------- | ----------------------------------------- |
-| build   | Build the project                         |
-| deploy  | Deploy to Cloudflare                      |
-| clean   | Delete files generated in previous builds |
-| serve   | Start the development server              |
+| Command       | Description                                               |
+| ------------- | --------------------------------------------------------- |
+| build         | Build the project                                         |
+| deploy        | Deploy to Cloudflare                                      |
+| clean         | Delete files generated in previous builds                 |
+| serve         | Start the development server                              |
+| serve:nocache | Start the development server without Cache-Control header |

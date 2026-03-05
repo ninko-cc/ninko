@@ -8,8 +8,14 @@ permalink: /index.html
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- prettier-ignore -->
         {% default %}
+
         {% injectCSS "./src/global/global.css" %}
         {% injectCSS "./src/index/index.css" %}
+
+        {% assign posts = collections.posts | reverse %}
+        {% for post in posts limit:5 %}
+        <link rel="prefetch" href="/images/artworks/{{ post.data.thumbnail.image }}" />
+        {% endfor %}
     </head>
     <body class="index">
         <h1>忍狐のホームページ</h1>
@@ -18,7 +24,7 @@ permalink: /index.html
             This is the personal website of †忍狐†.
         </p>
         <div>
-            <a href="/home">
+            <a href="/home/">
                 <img src="/images/buttons/20260210_button.avif" width="200" height="40" alt="Enter" />
             </a>
             <p class="blink">⚠︎ NSFW</p>

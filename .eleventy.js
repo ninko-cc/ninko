@@ -17,6 +17,7 @@ export default (config) => {
 
     config.addPassthroughCopy('images/buttons');
     config.addPassthroughCopy('src/robots.txt');
+    config.addPassthroughCopy('src/_headers');
 
     config.addShortcode('injectCSS', function (path) {
         const content = fs.readFileSync(path, 'utf8');
@@ -48,6 +49,10 @@ export default (config) => {
         <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
         <meta name="pinterest" content="nopin" />
         <link rel="alternate" type="application/rss+xml" title="忍狐のホームページ" href="https://ninko.cc/rss.xml" />
+        <link rel="prefetch" href="/home/" />
+        <link rel="prefetch" href="/about/" />
+        <link rel="prefetch" href="/gallery/" />
+        <link rel="prefetch" href="/links/ " />
         <title>忍狐のホームページ</title>
         `;
     });
@@ -169,4 +174,8 @@ export default (config) => {
             if (/animation/.test(filename)) ninko.animation.thumbnail.resize(inputPath, outputPath);
         });
     });
+
+    if (process.env.CACHE_ENABLED === 'true') {
+        config.setServerOptions({ headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } });
+    }
 };

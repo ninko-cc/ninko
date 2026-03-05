@@ -30,7 +30,7 @@ const ninko = {
         },
     },
 
-    addSuffix(filePath, suffix = '-thumbnail') {
+    addSuffix(filePath, suffix = '_thumbnail') {
         return filePath.replace(/(\.[^.]+)$/, `${suffix}$1`);
     },
 

@@ -46,7 +46,7 @@ export default (config) => {
     config.addShortcode('default', () => {
         return `
         <meta charset="UTF-8" />
-        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+        <meta name="robots" content="noindex, nofollow" />
         <meta name="pinterest" content="nopin" />
         <link rel="alternate" type="application/rss+xml" title="忍狐のホームページ" href="https://ninko.cc/rss.xml" />
         <link rel="prefetch" href="/home/" />

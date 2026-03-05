@@ -1,5 +1,6 @@
 /*
     Cache-Control: public, max-age=600, must-revalidate
+    X-Robots-Tag: noindex, nofollow
 
 /images/*
     Cache-Control: public, max-age=86400

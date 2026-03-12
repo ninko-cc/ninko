@@ -16,6 +16,14 @@ p {
     margin: 0;
 }
 
+p.enter {
+    line-height: 2em;
+}
+
+img {
+    vertical-align: middle;
+}
+
 .blink {
     animation: blink 1.25s steps(1) infinite;
 }

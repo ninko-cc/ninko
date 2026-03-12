@@ -5,9 +5,8 @@ permalink: /index.html
 <!doctype html>
 <html lang="en">
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- prettier-ignore -->
-        {% default %}
+        {% head 1.0 %}
 
         {% injectCSS "./src/global/global.css" %}
         {% injectCSS "./src/index/index.css" %}
@@ -23,9 +22,9 @@ permalink: /index.html
             Thank you for visiting my site!<br />
             This is the personal website of †忍狐†.
         </p>
-        <p class="enter">
-            Click below to enter.<br />
-            <a href="/home/"> <img src="/images/buttons/20260210_button.avif" width="200" height="40" alt="Enter" /></a><br />
+        <p>
+            <a href="/home/"> <img src="/images/buttons/20260210_button.avif" width="200" height="40" alt="Enter" /></a>
+            <span>&lt; click me!</span><br />
             <span class="blink">⚠︎ NSFW</span>
         </p>
     </body>

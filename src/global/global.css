@@ -147,12 +147,14 @@ th::after {
 }
 
 @media screen and (max-width: 1279px) {
-    body.index {
+    body {
         width: 100%;
     }
 
-    html:not(:has(body.index)) {
-        font-size: 26px;
+    img {
+        max-width: 100%;
+        object-fit: contain;
+        object-position: top;
     }
 
     @scope (section.updates) {

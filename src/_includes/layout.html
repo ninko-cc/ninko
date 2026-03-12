@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <!-- prettier-ignore -->
-        {% default %}
+        {% head 0.5 %}
         {% injectCSS "./src/global/global.css" %}
         {% if css %} {% for item in css %} {% injectCSS item %} {% endfor %} {% endif %}
     </head>

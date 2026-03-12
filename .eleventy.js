@@ -43,9 +43,10 @@ export default (config) => {
         return `<span>${content}</span>`;
     });
 
-    config.addShortcode('default', () => {
+    config.addShortcode('head', (scale = '1.0') => {
         return `
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=${scale}" />
         <meta name="robots" content="noindex, nofollow" />
         <meta name="pinterest" content="nopin" />
         <link rel="alternate" type="application/rss+xml" title="忍狐のホームページ" href="https://ninko.cc/rss.xml" />

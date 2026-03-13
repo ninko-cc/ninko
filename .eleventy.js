@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
 
 import { minify as minifyHTML } from 'html-minifier-terser';
 import { minify as minifyXML } from 'minify-xml';
@@ -58,8 +57,8 @@ export default (config) => {
         `;
     });
 
-    config.addFilter('rfc822', (date) => {
-        return new Date(date).toUTCString();
+    config.addFilter('iso8601', (date) => {
+        return new Date(date).toISOString().replace(/\.\d{3}Z$/, 'Z');
     });
 
     config.addCollection('posts', function (api) {
@@ -79,28 +78,24 @@ export default (config) => {
 
             const { title, category } = item.data;
 
+            item.data.id = index;
+            item.data.path = `/home/#${index}`;
+            item.data.rss = { title: title };
+
             switch (category) {
                 case 'original':
-                    item.data.rss = { title: title };
                     item.data.text = `${title}.`;
                     break;
                 case 'fanart':
-                    item.data.rss = { title: `Fan art of ${title}` };
-                    item.data.text = item.data.rss.title + '.';
+                    item.data.rss.title = `Fan art of ${title}`;
+                    item.data.text = `Fan art of ${title}.`;
                     break;
                 case 'study':
-                    item.data.rss = { title: `Study of ${title.toLowerCase()}` };
-                    item.data.text = item.data.rss.title + '.';
+                    item.data.rss.title = `Study of ${title.toLowerCase()}`;
+                    item.data.text = `Study of ${title.toLowerCase()}.`;
                     break;
                 case 'doodle':
-                    const formatter = new Intl.DateTimeFormat('ja-JP', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                    });
-                    const date = formatter.format(item.date).replaceAll('/', '-');
-                    item.data.title = `Diary updated: ${date}`;
-                    item.data.rss = { title: item.data.title };
+                    item.data.rss.title = `Diary updated: ${ninko.iso8601(item.date)}`;
                     item.data.thumbnail = {
                         image: item.data.image,
                         width: ninko.doodle.thumbnail.width,
@@ -108,7 +103,6 @@ export default (config) => {
                     };
                     break;
                 case 'textonly':
-                    item.data.rss = { title: ninko.head(item.data.text) };
                     item.data.thumbnail = {
                         alt: 'TEXT ONLY',
                         width: ninko.doodle.thumbnail.width,
@@ -117,13 +111,7 @@ export default (config) => {
                     break;
             }
 
-            item.data.id = index;
-            item.data.path = `/home/#${index}`;
             item.data.head = ninko.head(item.data.text);
-            item.data.rss.hash = crypto
-                .createHash('md5')
-                .update(item.data.title + item.data.date)
-                .digest('hex');
 
             return item;
         });

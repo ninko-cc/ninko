@@ -57,6 +57,15 @@ const ninko = {
         const head = text.replace(/<[^>]*>?/gm, '').slice(0, length);
         return head.length == length ? head.slice(0, -1) + '…' : head;
     },
+
+    iso8601(date) {
+        const formatter = new Intl.DateTimeFormat('ja-JP', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+        });
+        return formatter.format(date).replaceAll('/', '-');
+    },
 };
 
 function resize(inputPath, outputPath) {

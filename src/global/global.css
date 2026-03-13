@@ -151,12 +151,6 @@ th::after {
         width: 100%;
     }
 
-    img {
-        max-width: 100%;
-        object-fit: contain;
-        object-position: top;
-    }
-
     @scope (section.updates) {
         li {
             line-clamp: 3;

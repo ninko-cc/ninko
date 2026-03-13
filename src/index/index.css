@@ -16,6 +16,10 @@ p {
     margin: 0;
 }
 
+p.entrance {
+    line-height: 2.25em;
+}
+
 img {
     vertical-align: middle;
 }

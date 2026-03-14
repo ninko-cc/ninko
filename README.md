@@ -20,6 +20,7 @@ $ npm run [command]
 | ------------- | --------------------------------------------------------- |
 | build         | Build the project                                         |
 | deploy        | Deploy to Cloudflare                                      |
-| clean         | Delete files generated in previous builds                 |
+| clean         | Remove build artifacts                                    |
+| clean:all     | Remove build artifacts and image files                    |
 | serve         | Start the development server                              |
 | serve:nocache | Start the development server without Cache-Control header |

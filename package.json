@@ -4,7 +4,8 @@
     "description": "ninko.cc で公開中の個人サイトです",
     "type": "module",
     "scripts": {
-        "clean": "rm -fr _site",
+        "clean": "find _site -mindepth 1 -maxdepth 1 ! -name 'images' -exec rm -rf {} +",
+        "clean:all": "rm -fr _site",
         "serve": "CACHE_ENABLED=true npx @11ty/eleventy --serve",
         "serve:nocache": "npx @11ty/eleventy --serve",
         "build": "npx @11ty/eleventy",

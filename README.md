@@ -16,11 +16,11 @@ $ npm install
 $ npm run [command]
 ```
 
-| Command       | Description                                               |
-| ------------- | --------------------------------------------------------- |
-| build         | Build the project                                         |
-| deploy        | Deploy to Cloudflare                                      |
-| clean         | Remove build artifacts                                    |
-| clean:all     | Remove build artifacts and image files                    |
-| serve         | Start the development server                              |
-| serve:nocache | Start the development server without Cache-Control header |
+| Command       | Description                                        |
+| ------------- | -------------------------------------------------- |
+| build         | Build the project                                  |
+| deploy        | Deploy to Cloudflare                               |
+| clean         | Remove build artifacts                             |
+| clean:all     | Remove build artifacts and image files             |
+| serve         | Start the development server                       |
+| serve:nocache | Start the development server with caching disabled |

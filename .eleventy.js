@@ -156,7 +156,7 @@ export default (config) => {
             const outputPath = path.join(outputDir, filename);
 
             if (/fanart|original|study/.test(filename)) {
-                ninko.artwork.resize(inputPath, outputPath);
+                ninko.artwork.resize(inputPath, outputPath, true);
                 ninko.artwork.thumbnail.resize(inputPath, ninko.addSuffix(outputPath));
             }
             if (/doodle/.test(filename)) ninko.doodle.thumbnail.resize(inputPath, outputPath);

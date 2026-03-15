@@ -34,23 +34,28 @@ const ninko = {
         return filePath.replace(/(\.[^.]+)$/, `${suffix}$1`);
     },
 
-    async transform(inputPath, outputPath, width, height, quality = 70, animated = false) {
+    async transform(inputPath, outputPath, width, height, quality = 70, animated = false, signature = false) {
         if (fs.existsSync(outputPath)) return;
 
         const { ext } = path.parse(outputPath);
         const format = ext.slice(1);
 
-        const s = sharp(inputPath, { animated: animated });
-        const meta = await s.metadata();
+        let artwork = sharp(inputPath, { animated: animated });
+        const meta = await artwork.metadata();
 
-        if (width < meta.width && height < meta.height) {
-            console.log(`[ninko] Resizing ${outputPath} from ${inputPath}`);
-            await s.resize(width, height).toFormat(format, { quality: quality }).toFile(outputPath);
-            return;
+        if (meta.width <= width && meta.height <= height) {
+            console.log(`[ninko] Copying ${outputPath} from ${inputPath}`);
+            await fs.promises.copyFile(inputPath, outputPath);
         }
 
-        console.log(`[ninko] Copying ${outputPath} from ${inputPath}`);
-        await fs.promises.copyFile(inputPath, outputPath);
+        console.log(`[ninko] Resizing ${outputPath} from ${inputPath}`);
+        artwork.resize(width, height);
+
+        if (signature) {
+            artwork.composite([{ input: './images/signature/20260314_signature.webp', gravity: 'southeast' }]);
+        }
+
+        await artwork.toFormat(format, { quality: quality }).toFile(outputPath);
     },
 
     head(text, length = 30) {
@@ -68,8 +73,8 @@ const ninko = {
     },
 };
 
-function resize(inputPath, outputPath) {
-    ninko.transform(inputPath, outputPath, this.width, this.height, this.quality, this.animated);
+function resize(inputPath, outputPath, signature = false) {
+    ninko.transform(inputPath, outputPath, this.width, this.height, this.quality, this.animated, signature);
 }
 
 export default ninko;

@@ -46,6 +46,7 @@ const ninko = {
         if (meta.width <= width && meta.height <= height) {
             console.log(`[ninko] Copying ${outputPath} from ${inputPath}`);
             await fs.promises.copyFile(inputPath, outputPath);
+            return;
         }
 
         console.log(`[ninko] Resizing ${outputPath} from ${inputPath}`);

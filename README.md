@@ -10,6 +10,10 @@ $ cd ninko
 $ npm install
 ```
 
+> [!CAUTION]
+> Make sure to protect `/logs/` with Cloudflare Access (Zero Trust) before deploying.
+> Anyone can view your access logs without this setting.
+
 ```
 $ npx wrangler d1 create ninko-logs
 $ npx wrangler d1 execute ninko-logs --remote --command "CREATE TABLE access_logs (
@@ -25,9 +29,11 @@ $ npx wrangler d1 execute ninko-logs --remote --command "CREATE TABLE access_log
 );"
 ```
 
-> [!CAUTION]
-> Make sure to protect `/logs/` with Cloudflare Access (Zero Trust) before deploying.
-> Anyone can view your access logs without this setting.
+> Run the following command to exclude your own accesses from the logs (optional)
+
+```
+$ npx wrangler secret put CF_AUD
+```
 
 ## Usage
 

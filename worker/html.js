@@ -1,12 +1,12 @@
 import { UAParser } from 'ua-parser-js';
 import template from './template.html';
 
-export function renderHTML(rows, page, totalPages) {
+export function renderHTML(rows, pageNumber, totalPages) {
     const html = template
         .replace('{{ROWS}}', rows.map(tr).join(''))
-        .replace('{{PREV}}', page > 1 ? `<a href="?page=${page - 1}">Prev</a>` : '')
-        .replace('{{PAGE_NUMBER}}', `<span>${page} / ${totalPages}</span>`)
-        .replace('{{NEXT}}', page < totalPages ? `<a href="?page=${page + 1}">Next</a>` : '');
+        .replace('{{PREV}}', pageNumber > 1 ? `<a href="?page=${pageNumber - 1}">Prev</a>` : '')
+        .replace('{{PAGE_NUMBER}}', `<span>${pageNumber} / ${totalPages}</span>`)
+        .replace('{{NEXT}}', pageNumber < totalPages ? `<a href="?page=${pageNumber + 1}">Next</a>` : '');
 
     return new Response(html, { headers: { 'Content-Type': 'text/html' } });
 }

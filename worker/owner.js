@@ -1,9 +1,9 @@
 import { jwtVerify, createRemoteJWKSet } from 'jose';
 
 export default class {
-    constructor(env) {
-        this.issuer = `https://${env.CF_TEAM}.cloudflareaccess.com`;
-        this.audience = env.CF_AUD;
+    constructor(team, aud) {
+        this.issuer = `https://${team}.cloudflareaccess.com`;
+        this.audience = aud;
         this.jwks = createRemoteJWKSet(new URL(`${this.issuer}/cdn-cgi/access/certs`));
     }
 

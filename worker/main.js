@@ -20,7 +20,7 @@ export default {
             return renderHTML(rows, pageNumber, totalPages);
         }
 
-        owner ??= new Owner(env);
+        owner ??= new Owner(env.CF_TEAM, env.CF_AUD);
 
         if (!(await owner.verify(request))) ctx.waitUntil(logs.append(request));
 

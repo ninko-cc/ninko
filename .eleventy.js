@@ -49,10 +49,6 @@ export default (config) => {
         <meta name="robots" content="noindex, nofollow" />
         <meta name="pinterest" content="nopin" />
         <link rel="alternate" type="application/rss+xml" title="忍狐のホームページ" href="https://ninko.cc/rss.xml" />
-        <link rel="prefetch" href="/home/" />
-        <link rel="prefetch" href="/about/" />
-        <link rel="prefetch" href="/gallery/" />
-        <link rel="prefetch" href="/links/ " />
         <title>忍狐のホームページ</title>
         `;
     });

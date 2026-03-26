@@ -6,7 +6,7 @@
     "scripts": {
         "clean": "find _site -mindepth 1 -maxdepth 1 ! -name 'images' -exec rm -rf {} +",
         "clean:all": "rm -fr _site",
-        "serve:serve": "npx @11ty/eleventy --serve",
+        "serve": "npx @11ty/eleventy --serve",
         "serve:cache": "CACHE_ENABLED=true npx @11ty/eleventy --serve",
         "build": "npx @11ty/eleventy",
         "deploy": "npx wrangler deploy",

@@ -35,11 +35,12 @@ $ npx wrangler d1 execute ninko-logs --remote --command "CREATE TABLE access_log
 $ npm run [command]
 ```
 
-| Command       | Description                                        |
-| ------------- | -------------------------------------------------- |
-| build         | Build the project                                  |
-| deploy        | Deploy to Cloudflare                               |
-| clean         | Remove build artifacts                             |
-| clean:all     | Remove build artifacts and image files             |
-| serve         | Start the development server                       |
-| serve:nocache | Start the development server with caching disabled |
+| Command       | Description                                                      |
+| ------------- | ---------------------------------------------------------------- |
+| build         | Build the project                                                |
+| deploy        | Deploy to Cloudflare                                             |
+| clean         | Remove build artifacts                                           |
+| clean:all     | Remove build artifacts and image files                           |
+| serve         | Start the development server                                     |
+| serve:nocache | Start the development server with caching disabled               |
+| dev           | Start the local Cloudflare Workers emulator with /logs/ endpoint |

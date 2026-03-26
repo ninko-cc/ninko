@@ -21,6 +21,9 @@
         "terser": "^5.44.1",
         "wrangler": "^4.73.0"
     },
+    "dependencies": {
+        "ua-parser-js": "^2.0.9"
+    },
     "overrides": {
         "undici": ">=7.24.0"
     }

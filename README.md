@@ -10,6 +10,25 @@ $ cd ninko
 $ npm install
 ```
 
+```
+$ npx wrangler d1 create ninko-logs
+$ npx wrangler d1 execute ninko-logs --remote --command "CREATE TABLE access_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    accessed_at TEXT,
+    path TEXT,
+    ip TEXT,
+    region TEXT,
+    city TEXT,
+    org TEXT,
+    ua TEXT,
+    referer TEXT
+);"
+```
+
+> [!CAUTION]
+> Make sure to protect `/logs/` with Cloudflare Access (Zero Trust) before deploying.
+> Anyone can view your access logs without this setting.
+
 ## Usage
 
 ```

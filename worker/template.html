@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            table {
+                border-spacing: 1em 0.5em;
+            }
+
+            caption {
+                margin: 0.5em;
+                font-weight: 500;
+            }
+
+            th {
+                font-weight: 400;
+                text-align: left;
+                border-bottom: 1px solid black;
+            }
+
+            td {
+                padding-right: 0.5em;
+            }
+
+            nav {
+                display: flex;
+                gap: 1.5em;
+                justify-content: center;
+                margin: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <caption>
+                Logs
+            </caption>
+            <tr>
+                <th>Timestamp</th>
+                <th>Path</th>
+                <th>City</th>
+                <th>Organization</th>
+                <th>Client</th>
+                <th>Referer</th>
+            </tr>
+            {{ROWS}}
+        </table>
+        <nav>
+            <span>{{PREV}}</span>
+            <span>{{PAGE_NUMBER}}</span>
+            <span>{{NEXT}}</span>
+        </nav>
+    </body>
+</html>

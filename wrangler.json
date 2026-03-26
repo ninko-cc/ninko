@@ -1,9 +1,19 @@
 {
     "name": "ninko",
     "compatibility_date": "2026-01-09",
+    "main": "worker/main.js",
     "assets": {
-        "directory": "./_site"
+        "directory": "_site",
+        "run_worker_first": ["/", "/*/", "!/*.*"],
+        "binding": "ASSETS"
     },
+    "d1_databases": [
+        {
+            "database_name": "ninko-logs",
+            "database_id": "d182e479-21b2-445f-bd4a-777548891ac7",
+            "binding": "DB"
+        }
+    ],
     "workers_dev": false,
     "preview_urls": false,
     "observability": {

@@ -1,10 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-
 import shortcode from './eleventy/shortcodes.js';
 import filters from './eleventy/filters.js';
 import transforms from './eleventy/transforms.js';
-import { resizeImage, resizeThumbnail } from './eleventy/resize.js';
+import events from './eleventy/events.js';
 
 export default (config) => {
     config.setInputDirectory('src');
@@ -46,29 +43,7 @@ export default (config) => {
     config.addTransform('JSON圧縮', transforms.minifyJSON);
 
     config.on('eleventy.after', async ({ directories }) => {
-        const inputDir = './images/artworks';
-        const outputDir = path.join(directories.output, inputDir);
-
-        fs.mkdirSync(outputDir, { recursive: true });
-
-        posts.forEach((post) => {
-            switch (post.data.category) {
-                case 'fanart':
-                case 'original':
-                case 'study':
-                    resizeImage(post, inputDir, outputDir);
-                    resizeThumbnail(post, inputDir, outputDir);
-                    break;
-
-                case 'doodle':
-                    resizeThumbnail(post, inputDir, outputDir);
-                    break;
-
-                case 'animation':
-                    resizeThumbnail(post, inputDir, outputDir);
-                    break;
-            }
-        });
+        events.after(directories, posts);
     });
 
     if (process.env.CACHE_ENABLED === 'true') {

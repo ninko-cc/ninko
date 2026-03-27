@@ -1,12 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 
-import { minify as minifyHTML } from 'html-minifier-terser';
-import { minify as minifyXML } from 'minify-xml';
-import { minify as minifyJS } from 'terser';
-import { transform as minifyCSS } from 'lightningcss';
-
 import ninko from './ninko.js';
+import shortcode from './eleventy/shortcodes.js';
+import filters from './eleventy/filters.js';
+import transforms from './eleventy/transforms.js';
 
 export default (config) => {
     config.setInputDirectory('src');
@@ -18,44 +16,12 @@ export default (config) => {
     config.addPassthroughCopy('src/robots.txt');
     config.addPassthroughCopy('src/_headers');
 
-    config.addShortcode('injectCSS', function (path) {
-        const content = fs.readFileSync(path, 'utf8');
-        const minified = minifyCSS({
-            filename: path,
-            code: Buffer.from(content),
-            minify: true,
-            sourceMap: false,
-        }).code;
-        return `<style>${minified}</style>`;
-    });
+    config.addShortcode('injectCSS', shortcode.injectCSS);
+    config.addShortcode('injectJS', shortcode.injectJS);
+    config.addShortcode('button', shortcode.button);
+    config.addShortcode('head', shortcode.head);
 
-    config.addShortcode('injectJS', async function (path) {
-        const content = fs.readFileSync(path, 'utf8');
-        const minified = (await minifyJS(content)).code;
-        return `<script>${minified}</script>`;
-    });
-
-    config.addShortcode('button', (src, href) => {
-        const content = href
-            ? `<a href="${href}" target="_blank"><img class="button" src="${src}" width="200" height="40" loading="lazy" /></a>`
-            : `<img class="button not-found" src="${src}" width="200" height="40" loading="lazy" />`;
-        return `<span>${content}</span>`;
-    });
-
-    config.addShortcode('head', (scale = '1.0') => {
-        return `
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=${scale}" />
-        <meta name="robots" content="noindex, nofollow" />
-        <meta name="pinterest" content="nopin" />
-        <link rel="alternate" type="application/rss+xml" title="忍狐のホームページ" href="https://ninko.cc/rss.xml" />
-        <title>忍狐のホームページ</title>
-        `;
-    });
-
-    config.addFilter('iso8601', (date) => {
-        return new Date(date).toISOString().replace(/\.\d{3}Z$/, 'Z');
-    });
+    config.addFilter('iso8601', filters.iso8601);
 
     config.addCollection('posts', function (api) {
         let seq = 0;
@@ -113,33 +79,9 @@ export default (config) => {
         });
     });
 
-    config.addTransform('HTML圧縮', async function (content) {
-        if ((this.page.outputPath || '').endsWith('.html')) {
-            return minifyHTML(content, {
-                collapseWhitespace: true,
-                useShortDoctype: true,
-                removeRedundantAttributes: true,
-                removeComments: true,
-            });
-        }
-        return content;
-    });
-
-    config.addTransform('XML圧縮', async function (content) {
-        if ((this.page.outputPath || '').endsWith('.xml')) {
-            return minifyXML(content, {
-                shortenNamespaces: false,
-            });
-        }
-        return content;
-    });
-
-    config.addTransform('JSON圧縮', async function (content) {
-        if ((this.page.outputPath || '').endsWith('.json')) {
-            return JSON.stringify(JSON.parse(content));
-        }
-        return content;
-    });
+    config.addTransform('HTML圧縮', transforms.minifyHTML);
+    config.addTransform('XML圧縮', transforms.minifyXML);
+    config.addTransform('JSON圧縮', transforms.minifyJSON);
 
     config.on('eleventy.after', async ({ directories }) => {
         const inputDir = './images/artworks';

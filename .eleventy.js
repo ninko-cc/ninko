@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import ninko from './ninko.js';
+import resize from './eleventy/resize.js';
 import shortcode from './eleventy/shortcodes.js';
 import filters from './eleventy/filters.js';
 import transforms from './eleventy/transforms.js';
@@ -23,58 +23,20 @@ export default (config) => {
 
     config.addFilter('iso8601', filters.iso8601);
 
+    let posts;
+
     config.addCollection('posts', function (api) {
-        let seq = 0;
-
-        return api.getFilteredByTag('posts').map((item, index) => {
-            if (item.data.tags.includes('artworks')) {
-                item.data.seq = seq++;
-                item.data.width = ninko.artwork.width;
-                item.data.height = ninko.artwork.height;
-                item.data.thumbnail = {
-                    image: ninko.addSuffix(item.data.image),
-                    width: ninko.artwork.thumbnail.width,
-                    height: ninko.artwork.thumbnail.height,
-                };
-            }
-
-            const { title, category } = item.data;
-
+        posts = api.getFilteredByTag('posts').map((item, index) => {
             item.data.id = index;
             item.data.path = `/home/#${index}`;
-            item.data.rss = { title: title };
+            return item;
+        });
+        return posts;
+    });
 
-            switch (category) {
-                case 'original':
-                    item.data.text = `${title}.`;
-                    break;
-                case 'fanart':
-                    item.data.rss.title = `Fan art of ${title}`;
-                    item.data.text = `Fan art of ${title}.`;
-                    break;
-                case 'study':
-                    item.data.rss.title = `Study of ${title.toLowerCase()}`;
-                    item.data.text = `Study of ${title.toLowerCase()}.`;
-                    break;
-                case 'doodle':
-                    item.data.rss.title = `Diary updated: ${ninko.iso8601(item.date)}`;
-                    item.data.thumbnail = {
-                        image: item.data.image,
-                        width: ninko.doodle.thumbnail.width,
-                        height: ninko.doodle.thumbnail.height,
-                    };
-                    break;
-                case 'textonly':
-                    item.data.thumbnail = {
-                        alt: 'TEXT ONLY',
-                        width: ninko.doodle.thumbnail.width,
-                        height: ninko.doodle.thumbnail.height,
-                    };
-                    break;
-            }
-
-            item.data.head = ninko.head(item.data.text);
-
+    config.addCollection('artworks', function (api) {
+        return api.getFilteredByTag('artworks').map((item, index) => {
+            item.data.seq = index;
             return item;
         });
     });
@@ -88,17 +50,55 @@ export default (config) => {
         const outputDir = path.join(directories.output, inputDir);
 
         fs.mkdirSync(outputDir, { recursive: true });
+        posts.forEach((post) => {
+            switch (post.data.category) {
+                case 'fanart':
+                case 'original':
+                case 'study':
+                    resize(
+                        path.join(inputDir, post.data.image),
+                        path.join(outputDir, post.data.image),
+                        post.data.width,
+                        post.data.height,
+                        100,
+                        false,
+                        true,
+                    );
+                    resize(
+                        path.join(inputDir, post.data.image),
+                        path.join(outputDir, post.data.thumbnail.image),
+                        post.data.thumbnail.width,
+                        post.data.thumbnail.height,
+                        70,
+                        false,
+                        false,
+                    );
+                    break;
 
-        fs.readdirSync(inputDir).forEach((filename) => {
-            const inputPath = path.join(inputDir, filename);
-            const outputPath = path.join(outputDir, filename);
+                case 'doodle':
+                    resize(
+                        path.join(inputDir, post.data.image),
+                        path.join(outputDir, post.data.thumbnail.image),
+                        post.data.thumbnail.width,
+                        post.data.thumbnail.height,
+                        70,
+                        false,
+                        false,
+                    );
+                    break;
 
-            if (/fanart|original|study/.test(filename)) {
-                ninko.artwork.resize(inputPath, outputPath, true);
-                ninko.artwork.thumbnail.resize(inputPath, ninko.addSuffix(outputPath));
+                case 'animation':
+                    resize(
+                        path.join(inputDir, post.data.image),
+                        path.join(outputDir, post.data.thumbnail.image),
+                        post.data.thumbnail.width,
+                        post.data.thumbnail.height,
+                        70,
+                        true,
+                        false,
+                    );
+                    break;
             }
-            if (/doodle/.test(filename)) ninko.doodle.thumbnail.resize(inputPath, outputPath);
-            if (/animation/.test(filename)) ninko.animation.thumbnail.resize(inputPath, outputPath);
         });
     });
 

@@ -8,7 +8,7 @@ export default {
         },
         thumbnail: (data) => {
             return {
-                image: data.image,
+                image: data.image.replace(/(\.[^.]+)$/, '_thumbnail$1'),
                 width: 300,
                 height: 300,
                 quality: 70,

@@ -21,10 +21,6 @@ export default {
                 case 'doodle':
                     resizeThumbnail(post, inputDir, outputDir);
                     break;
-
-                case 'animation':
-                    resizeThumbnail(post, inputDir, outputDir);
-                    break;
             }
         });
     },

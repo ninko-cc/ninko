@@ -23,7 +23,7 @@ pagination:
         {% if post.data.category == "textonly" %}<!---->
 
         {% capture style %} style="width: {{ post.data.thumbnail.width }}px; height: {{ post.data.thumbnail.height }}px;" {% endcapture %}
-        <div class="thumbnail" {{style }}>{{ post.data.thumbnail.alt }}</div>
+        <div class="thumbnail" {{ style }}>{{ post.data.thumbnail.display }}</div>
 
         {% else %}
         <img

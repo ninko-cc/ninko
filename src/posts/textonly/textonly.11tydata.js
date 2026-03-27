@@ -6,7 +6,7 @@ export default {
             return {
                 width: 300,
                 height: 300,
-                alt: 'TEXT ONLY',
+                display: 'TEXT ONLY',
             };
         },
     },

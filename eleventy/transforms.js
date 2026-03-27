@@ -4,9 +4,10 @@ import { minify as _minifyXML } from 'minify-xml';
 export default {
     async minifyHTML(content) {
         if ((this.page.outputPath || '').endsWith('.html')) {
-            return _minifyHTML(content, {
+            const cleanedContent = content.replace(/>\s*\n\s*/g, '>').replace(/\s*\n\s*</g, '<');
+            return _minifyHTML(cleanedContent, {
                 collapseWhitespace: true,
-                collapseInlineTagWhitespace: true,
+                collapseInlineTagWhitespace: false,
                 useShortDoctype: true,
                 removeRedundantAttributes: true,
                 removeComments: true,

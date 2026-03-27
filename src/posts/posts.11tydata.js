@@ -16,9 +16,9 @@ export default {
             return {
                 image: data.image.replace(/(\.[^.]+)$/, '_thumbnail$1'),
                 width: 300,
-                height: 375,
+                height: data.tags.includes('artworks') ? 375 : 300,
                 quality: 70,
-                animated: false,
+                animated: data.animated,
                 signature: false,
             };
         },

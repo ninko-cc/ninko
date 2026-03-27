@@ -6,15 +6,5 @@ export default {
             const date = formatter.format(data.page.date).replaceAll('/', '-');
             return { title: `Diary updated: ${date}` };
         },
-        thumbnail: (data) => {
-            return {
-                image: data.image.replace(/(\.[^.]+)$/, '_thumbnail$1'),
-                width: 300,
-                height: 300,
-                quality: 70,
-                animated: data.animated || false,
-                signature: false,
-            };
-        },
     },
 };

@@ -27,4 +27,26 @@ async function resize(inputPath, outputPath, width, height, quality, animated, s
     await artwork.toFormat(format, { quality: quality }).toFile(outputPath);
 }
 
-export default resize;
+export async function resizeImage(post, inputDir, outputDir) {
+    resize(
+        path.join(inputDir, post.data.image),
+        path.join(outputDir, post.data.image),
+        post.data.width,
+        post.data.height,
+        post.data.quality,
+        post.data.animated,
+        post.data.signature,
+    );
+}
+
+export async function resizeThumbnail(post, inputDir, outputDir) {
+    resize(
+        path.join(inputDir, post.data.image),
+        path.join(outputDir, post.data.thumbnail.image),
+        post.data.thumbnail.width,
+        post.data.thumbnail.height,
+        post.data.thumbnail.quality,
+        post.data.thumbnail.animated,
+        post.data.thumbnail.signature,
+    );
+}

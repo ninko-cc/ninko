@@ -3,10 +3,12 @@ export default {
     eleventyComputed: {
         thumbnail: (data) => {
             return {
+                image: data.image,
                 width: 300,
                 height: 300,
                 quality: 70,
-                image: data.image,
+                animated: data.animated || false,
+                signature: false,
             };
         },
         rss: (data) => {

@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 
-import resize from './eleventy/resize.js';
 import shortcode from './eleventy/shortcodes.js';
 import filters from './eleventy/filters.js';
 import transforms from './eleventy/transforms.js';
+import { resizeImage, resizeThumbnail } from './eleventy/resize.js';
 
 export default (config) => {
     config.setInputDirectory('src');
@@ -50,53 +50,22 @@ export default (config) => {
         const outputDir = path.join(directories.output, inputDir);
 
         fs.mkdirSync(outputDir, { recursive: true });
+
         posts.forEach((post) => {
             switch (post.data.category) {
                 case 'fanart':
                 case 'original':
                 case 'study':
-                    resize(
-                        path.join(inputDir, post.data.image),
-                        path.join(outputDir, post.data.image),
-                        post.data.width,
-                        post.data.height,
-                        100,
-                        false,
-                        true,
-                    );
-                    resize(
-                        path.join(inputDir, post.data.image),
-                        path.join(outputDir, post.data.thumbnail.image),
-                        post.data.thumbnail.width,
-                        post.data.thumbnail.height,
-                        70,
-                        false,
-                        false,
-                    );
+                    resizeImage(post, inputDir, outputDir);
+                    resizeThumbnail(post, inputDir, outputDir);
                     break;
 
                 case 'doodle':
-                    resize(
-                        path.join(inputDir, post.data.image),
-                        path.join(outputDir, post.data.thumbnail.image),
-                        post.data.thumbnail.width,
-                        post.data.thumbnail.height,
-                        70,
-                        false,
-                        false,
-                    );
+                    resizeThumbnail(post, inputDir, outputDir);
                     break;
 
                 case 'animation':
-                    resize(
-                        path.join(inputDir, post.data.image),
-                        path.join(outputDir, post.data.thumbnail.image),
-                        post.data.thumbnail.width,
-                        post.data.thumbnail.height,
-                        70,
-                        true,
-                        false,
-                    );
+                    resizeThumbnail(post, inputDir, outputDir);
                     break;
             }
         });

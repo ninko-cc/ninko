@@ -1,6 +1,9 @@
 {
     "engine": "11ty",
     "format": {
-        "indentSize": 4
+        "indentSize": 4,
+        "markup": {
+            "forceAttribute": 6
+        }
     }
 }

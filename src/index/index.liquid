@@ -5,27 +5,27 @@ permalink: /index.html
 <!doctype html>
 <html lang="en">
     <head>
-        <!-- prettier-ignore -->
         {% head 1.0 %}
-
         {% injectCSS "./src/global/global.css" %}
         {% injectCSS "./src/index/index.css" %}
 
         {% assign posts = collections.posts | reverse %}
-        {% for post in posts limit:5 %}
-        {% if post.data.thumbnail.image %}
-        <link rel="prefetch" href="/images/artworks/{{ post.data.thumbnail.image }}" />
-        {% endif %} {% endfor %}
+        {% for post in posts limit: 5 %}
+            {% if post.data.thumbnail.image %}
+                <link rel="prefetch" href="/images/artworks/{{ post.data.thumbnail.image }}" />
+            {% endif %}
+        {% endfor %}
     </head>
     <body>
         <h1>忍狐のホームページ</h1>
         <p>
-            Thank you for visiting my site!<br />
+            Thank you for visiting my site!<br/>
             This is the personal website of †忍狐†.
         </p>
         <p class="entrance">
-            <span>Click below to enter.</span><br />
-            <a href="/home/"> <img src="/images/buttons/20260210_button.avif" width="200" height="40" alt="Enter" /></a><br />
+            <span>Click below to enter.</span><br/>
+            <a href="/home/">
+                <img src="/images/buttons/20260210_button.avif" width="200" height="40" alt="Enter" /></a><br/>
             <span class="blink">⚠︎ NSFW</span>
         </p>
     </body>

@@ -1,0 +1,6 @@
+{
+    "engine": "11ty",
+    "format": {
+        "indentSize": 4
+    }
+}

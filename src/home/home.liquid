@@ -1,0 +1,49 @@
+---
+layout: layout.liquid
+css: './src/home/home.css'
+js: './src/home/home.js'
+pagination:
+    data: collections.posts
+    size: 5
+    reverse: true
+---
+
+{% if pagination.pageNumber == 0 %}
+    <h1>Home<small>ようこそ！</small>
+    </h1>
+{% else %}
+    <h1>Archives<small>過去の投稿</small>
+    </h1>
+{% endif %}
+
+
+<section>
+    {% for post in pagination.items %}
+        <section class="post" id="{{ post.data.id }}">
+            <header>{{ post.date | date: "%Y-%m-%d" }}</header>
+
+            {% if post.data.category == "textonly" %}
+                <div class="thumbnail" style="width: {{ post.data.thumbnail.width }}px; height: {{ post.data.thumbnail.height }}px;">{{ post.data.thumbnail.display }}</div>
+
+            {% else %}
+                <img class="thumbnail" src="/images/artworks/{{ post.data.thumbnail.image }}" width="{{ post.data.thumbnail.width }}" height="{{ post.data.thumbnail.height }}" loading="lazy" />
+            {% endif %}
+
+            <p>{{ post.data.text }}</p>
+        </section>
+    {% endfor %}
+
+    <nav class="pagination">
+        {% if pagination.href.previous %}
+            <a href="{{ pagination.href.previous }}">Prev</a>
+        {% endif %}
+
+        {% if pagination.href.previous and pagination.href.next %}
+            <span>|</span>
+        {% endif %}
+
+        {% if pagination.href.next %}
+            <a href="{{ pagination.href.next }}">Next</a>
+        {% endif %}
+    </nav>
+</section>

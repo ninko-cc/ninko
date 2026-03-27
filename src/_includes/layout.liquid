@@ -1,10 +1,13 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <!-- prettier-ignore -->
         {% head 0.5 %}
         {% injectCSS "./src/global/global.css" %}
-        {% if css %} {% for item in css %} {% injectCSS item %} {% endfor %} {% endif %}
+        {% if css %}
+            {% for item in css %}
+                {% injectCSS item %}
+            {% endfor %}
+        {% endif %}
     </head>
     <body>
         <header class="main">忍狐のホームページ</header>
@@ -21,13 +24,12 @@
             <section class="updates">
                 <header>Updates</header>
                 <ul>
-                    <!-- prettier-ignore -->
                     {% assign posts = collections.posts | reverse %}
-                    {% for post in posts limit:5 %}
-                    <li>
-                        <span>{{ post.date | date: "%m/%d" }}</span>
-                        <a href="{{ post.data.path }}">{{ post.data.head }}</a>
-                    </li>
+                    {% for post in posts limit: 5 %}
+                        <li>
+                            <span>{{ post.date | date: "%m/%d" }}</span>
+                            <a href="{{ post.data.path }}">{{ post.data.head }}</a>
+                        </li>
                     {% endfor %}
                 </ul>
             </section>
@@ -36,12 +38,20 @@
         <footer>
             <div>© 2025 †忍狐†</div>
             <div>
-                <a href="https://bsky.app/profile/ninko.cc" target="_blank">Bluesky</a> | <a href="https://github.com/ninko-cc" target="_blank">Github</a> |
-                <a onclick="mail()">Mail</a> | <a href="/atom.xml" target="_blank">Atom</a>
+                <a href="https://bsky.app/profile/ninko.cc" target="_blank">Bluesky</a>
+                |
+                <a href="https://github.com/ninko-cc" target="_blank">Github</a>
+                |
+                <a onclick="mail()">Mail</a>
+                |
+                <a href="/atom.xml" target="_blank">Atom</a>
             </div>
         </footer>
-        <!-- prettier-ignore -->
         {% injectJS "./src/global/global.js" %}
-        {% if js %} {% for item in js %} {% injectJS item %} {% endfor %} {% endif %}
+        {% if js %}
+            {% for item in js %}
+                {% injectJS item %}
+            {% endfor %}
+        {% endif %}
     </body>
 </html>

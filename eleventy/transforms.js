@@ -6,6 +6,7 @@ export default {
         if ((this.page.outputPath || '').endsWith('.html')) {
             return _minifyHTML(content, {
                 collapseWhitespace: true,
+                collapseInlineTagWhitespace: true,
                 useShortDoctype: true,
                 removeRedundantAttributes: true,
                 removeComments: true,

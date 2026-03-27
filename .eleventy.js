@@ -1,4 +1,4 @@
-import shortcode from './eleventy/shortcodes.js';
+import shortcodes from './eleventy/shortcodes.js';
 import filters from './eleventy/filters.js';
 import transforms from './eleventy/transforms.js';
 import events from './eleventy/events.js';
@@ -13,10 +13,10 @@ export default (config) => {
     config.addPassthroughCopy('src/robots.txt');
     config.addPassthroughCopy('src/_headers');
 
-    config.addShortcode('injectCSS', shortcode.injectCSS);
-    config.addShortcode('injectJS', shortcode.injectJS);
-    config.addShortcode('button', shortcode.button);
-    config.addShortcode('head', shortcode.head);
+    config.addShortcode('injectCSS', shortcodes.injectCSS);
+    config.addShortcode('injectJS', shortcodes.injectJS);
+    config.addShortcode('button', shortcodes.button);
+    config.addShortcode('head', shortcodes.head);
 
     config.addFilter('iso8601', filters.iso8601);
 

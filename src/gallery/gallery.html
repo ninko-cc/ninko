@@ -7,7 +7,7 @@ css: './src/gallery/gallery.css'
 
 <section>
     {% for art in collections.artworks reversed %}
-    <a href="/artworks/{{ art.data.seq }}/"
+    <a href="/artworks/{{ art.data.artwork.id }}/"
         ><img src="/images/artworks/{{ art.data.thumbnail.image }}" width="{{ art.data.thumbnail.width }}" height="{{ art.data.thumbnail.height }}" loading="lazy"
     /></a>
     {% endfor %}

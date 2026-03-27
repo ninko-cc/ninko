@@ -33,7 +33,7 @@ export default (config) => {
 
     config.addCollection('artworks', function (api) {
         return api.getFilteredByTag('artworks').map((item, index) => {
-            item.data.seq = index;
+            item.data.artwork = { id: index };
             return item;
         });
     });

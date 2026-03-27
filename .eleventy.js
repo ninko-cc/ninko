@@ -16,7 +16,6 @@ export default (config) => {
     config.addShortcode('injectCSS', shortcodes.injectCSS);
     config.addShortcode('injectJS', shortcodes.injectJS);
     config.addShortcode('button', shortcodes.button);
-    config.addShortcode('head', shortcodes.head);
 
     config.addFilter('iso8601', filters.iso8601);
 

@@ -1,0 +1,48 @@
+---
+layout: base.liquid
+scale: 0.5
+---
+
+<body>
+    <header class="main">忍狐のホームページ</header>
+    <nav class="main">
+        <section class="menu">
+            <header>Menu</header>
+            <ul>
+                <li><a href="/home/">Home</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/gallery/">Gallery</a></li>
+                <li><a href="/links/">Links</a></li>
+            </ul>
+        </section>
+        <section class="updates">
+            <header>Updates</header>
+            <ul>
+                {% assign posts = collections.posts | reverse %}
+                {% for post in posts limit: 5 %}
+                    <li>
+                        <span>{{ post.date | date: "%m/%d" }}</span>
+                        <a href="{{ post.data.path }}">{{ post.data.head }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </nav>
+    <main>{{ content }}</main>
+    <footer>
+        <div>© 2025 †忍狐†</div>
+        <div>
+            <a href="https://bsky.app/profile/ninko.cc" target="_blank">Bluesky</a>
+            |
+            <a href="https://github.com/ninko-cc" target="_blank">Github</a>
+            |
+            <a onclick="mail()">Mail</a>
+            |
+            <a href="/atom.xml" target="_blank">Atom</a>
+        </div>
+    </footer>
+    {% injectJS "./src/global/global.js" %}
+    {% if js %}
+        {% injectJS js %}
+    {% endif %}
+</body>

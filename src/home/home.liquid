@@ -1,6 +1,6 @@
 ---
-layout: layout.liquid
-css: './src/home/home.css'
+layout: body.liquid
+css:  './src/home/home.css'
 js: './src/home/home.js'
 pagination:
     data: collections.posts
@@ -9,13 +9,16 @@ pagination:
 ---
 
 {% if pagination.pageNumber == 0 %}
-    <h1>Home<small>ようこそ！</small>
+    <h1>
+        Home
+        <small>ようこそ！</small>
     </h1>
 {% else %}
-    <h1>Archives<small>過去の投稿</small>
+    <h1>
+        Archives
+        <small>過去の投稿</small>
     </h1>
 {% endif %}
-
 
 <section>
     {% for post in pagination.items %}
@@ -24,7 +27,6 @@ pagination:
 
             {% if post.data.category == "textonly" %}
                 <div class="thumbnail" style="width: {{ post.data.thumbnail.width }}px; height: {{ post.data.thumbnail.height }}px;">{{ post.data.thumbnail.display }}</div>
-
             {% else %}
                 <img class="thumbnail" src="/images/artworks/{{ post.data.thumbnail.image }}" width="{{ post.data.thumbnail.width }}" height="{{ post.data.thumbnail.height }}" loading="lazy" />
             {% endif %}

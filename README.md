@@ -16,17 +16,7 @@ $ npm install
 
 ```
 $ npx wrangler d1 create ninko-logs
-$ npx wrangler d1 execute ninko-logs --remote --command "CREATE TABLE access_logs (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    accessed_at TEXT,
-    path TEXT,
-    ip TEXT,
-    region TEXT,
-    city TEXT,
-    org TEXT,
-    ua TEXT,
-    referer TEXT
-);"
+$ npx wrangler d1 execute ninko-logs --remote --file ./sql/create-table.sql
 ```
 
 > Run the following command to exclude your own accesses from the logs (optional)

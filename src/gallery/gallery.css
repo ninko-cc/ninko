@@ -1,3 +1,10 @@
-img {
-    vertical-align: middle;
+@scope (main) {
+    img {
+        vertical-align: middle;
+    }
+
+    section {
+        display: flex;
+        flex-wrap: wrap;
+    }
 }

@@ -1,7 +1,9 @@
 @media screen and (max-width: 1279px) {
-    img {
-        max-width: 100%;
-        object-fit: contain;
-        object-position: top;
+    @scope (main) {
+        img {
+            max-width: 100%;
+            object-fit: contain;
+            object-position: top;
+        }
     }
 }

@@ -47,6 +47,9 @@ a:visited {
 }
 
 h1 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
     font-size: 2rem;
     margin: 0.5rem 0 1.5rem 0;
     padding: 0 1.5rem 0 0;
@@ -57,7 +60,6 @@ h1 {
 h1 > small {
     font-size: 0.5em;
     font-weight: 400;
-    margin-left: 1em;
 }
 
 h2 {
@@ -125,7 +127,7 @@ th::after {
         }
 
         li > span {
-            margin-right: 0.5em;
+            margin-right: 0.25em;
         }
     }
 }

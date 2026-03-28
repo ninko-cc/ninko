@@ -3,7 +3,7 @@ export default {
     permalink: false,
     width: 640,
     height: 800,
-    quality: 100,
+    quality: 80,
     animated: false,
     signature: true,
     eleventyComputed: {

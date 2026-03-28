@@ -27,10 +27,7 @@ pagination:
             {% if post.data.category == 'textonly' %}
                 <div
                     class='thumbnail'
-                    style='
-                        width: {{ post.data.thumbnail.width }}px;
-                        height: {{ post.data.thumbnail.height }}px;
-                    '
+                    style='width: {{ post.data.thumbnail.width }}px; height: {{ post.data.thumbnail.height }}px;'
                 >
                     {{ post.data.thumbnail.display }}
                 </div>

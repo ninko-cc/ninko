@@ -2,7 +2,6 @@
 layout: body.liquid
 css: './src/gallery/gallery.css'
 ---
-
 <h1>
     Gallery
     <small>全力で描いた絵！</small>
@@ -10,8 +9,13 @@ css: './src/gallery/gallery.css'
 
 <section>
     {% for art in collections.artworks reversed %}
-        <a href="/artworks/{{ art.data.artwork.id }}/">
-            <img src="/images/artworks/{{ art.data.thumbnail.image }}" width="{{ art.data.thumbnail.width }}" height="{{ art.data.thumbnail.height }}" loading="lazy" />
+        <a href='/artworks/{{ art.data.artwork.id }}/'>
+            <img
+                src='/images/artworks/{{ art.data.thumbnail.image }}'
+                width='{{ art.data.thumbnail.width }}'
+                height='{{ art.data.thumbnail.height }}'
+                loading='lazy'
+            >
         </a>
     {% endfor %}
 </section>

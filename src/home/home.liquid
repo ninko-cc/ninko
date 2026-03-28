@@ -7,7 +7,6 @@ pagination:
     size: 5
     reverse: true
 ---
-
 {% if pagination.pageNumber == 0 %}
     <h1>
         Home
@@ -22,22 +21,36 @@ pagination:
 
 <section>
     {% for post in pagination.items %}
-        <section class="post" id="{{ post.data.id }}">
-            <header>{{ post.date | date: "%Y-%m-%d" }}</header>
+        <section class='post' id='{{ post.data.id }}'>
+            <header>{{ post.date | date: '%Y-%m-%d' }}</header>
 
-            {% if post.data.category == "textonly" %}
-                <div class="thumbnail" style="width: {{ post.data.thumbnail.width }}px; height: {{ post.data.thumbnail.height }}px;">{{ post.data.thumbnail.display }}</div>
+            {% if post.data.category == 'textonly' %}
+                <div
+                    class='thumbnail'
+                    style='
+                        width: {{ post.data.thumbnail.width }}px;
+                        height: {{ post.data.thumbnail.height }}px;
+                    '
+                >
+                    {{ post.data.thumbnail.display }}
+                </div>
             {% else %}
-                <img class="thumbnail" src="/images/artworks/{{ post.data.thumbnail.image }}" width="{{ post.data.thumbnail.width }}" height="{{ post.data.thumbnail.height }}" loading="lazy" />
+                <img
+                    class='thumbnail'
+                    src='/images/artworks/{{ post.data.thumbnail.image }}'
+                    width='{{ post.data.thumbnail.width }}'
+                    height='{{ post.data.thumbnail.height }}'
+                    loading='lazy'
+                >
             {% endif %}
 
             <p>{{ post.data.text }}</p>
         </section>
     {% endfor %}
 
-    <nav class="pagination">
+    <nav>
         {% if pagination.href.previous %}
-            <a href="{{ pagination.href.previous }}">Prev</a>
+            <a href='{{ pagination.href.previous }}'>Prev</a>
         {% endif %}
 
         {% if pagination.href.previous and pagination.href.next %}
@@ -45,7 +58,7 @@ pagination:
         {% endif %}
 
         {% if pagination.href.next %}
-            <a href="{{ pagination.href.next }}">Next</a>
+            <a href='{{ pagination.href.next }}'>Next</a>
         {% endif %}
     </nav>
 </section>

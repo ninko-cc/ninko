@@ -1,13 +1,10 @@
 ---
 permalink: atom.xml
-xml-declaration: '<?xml version="1.0" encoding="UTF-8"?>'
 ---
-
 {% assign posts = collections.posts | reverse %}
 
-{{ xml-declaration }}
-
-<feed xmlns="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns='http://www.w3.org/2005/Atom'>
     <id>https://ninko.cc/atom.xml</id>
     <title>忍狐のホームページ</title>
     <updated>{{ posts[0].date | iso8601 }}</updated>
@@ -17,7 +14,7 @@ xml-declaration: '<?xml version="1.0" encoding="UTF-8"?>'
             <id>tag:ninko.cc,2025:{{ post.data.id }}</id>
             <title>{{ post.data.rss.title }}</title>
             <updated>{{ post.date | iso8601 }}</updated>
-            <link rel="alternate" href="{{ 'https://ninko.cc' | append: post.data.path }}" />
+            <link rel='alternate' href='{{ 'https://ninko.cc' | append: post.data.path }}' />
         </entry>
     {% endfor %}
 </feed>

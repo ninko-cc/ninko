@@ -21,10 +21,10 @@ export default {
         return `<script>${minified}</script>`;
     },
 
-    button(src, href) {
+    button(src, href, loading) {
         const content = href
-            ? `<a href="${href}" target="_blank"><img class="button" src="${src}" width="200" height="40" loading="lazy" /></a>`
-            : `<img class="button not-found" src="${src}" width="200" height="40" loading="lazy" />`;
+            ? `<a href="${href}" target="_blank"><img class="button" src="${src}" width="200" height="40" ${loading ? `loading="${loading}"` : ''} /></a>`
+            : `<img class="button not-found" src="${src}" width="200" height="40" ${loading ? `loading="${loading}"` : ''} />`;
         return `<span>${content}</span>`;
     },
 };

@@ -9,14 +9,18 @@ js: './src/gallery/gallery.js'
 </h1>
 
 <section>
+    {% assign count = 0 %}
     {% for post in collections.posts reversed %}
         {% if post.data.gallery %}
+            {% assign count = count | plus: 1 %}
             <a href='/posts/{{ post.data.id }}/'>
                 <img
                     src='/images/artworks/{{ post.data.thumbnail.image }}'
                     width='{{ post.data.thumbnail.width }}'
                     height='{{ post.data.thumbnail.height }}'
-                    loading='lazy'
+                    {% if 8 < count %}
+                        loading='lazy'
+                    {% endif %}
                 >
             </a>
         {% endif %}

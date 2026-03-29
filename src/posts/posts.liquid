@@ -17,6 +17,7 @@ permalink: '/posts/{{ pagination.pageNumber | plus: 1 }}/index.html'
         width='{{ post.data.width }}'
         height='{{ post.data.height }}'
         src='/images/artworks/{{ post.data.image }}'
+        decoding='async'
     >
 {% endif %}
 

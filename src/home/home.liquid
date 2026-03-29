@@ -21,25 +21,26 @@ pagination:
 
 <section>
     {% for post in pagination.items %}
-        <section class='post' id='{{ post.data.id }}'>
+        <section class='post'>
             <header>{{ post.date | date: '%Y-%m-%d' }}</header>
 
-            {% if post.data.category == 'textonly' %}
-                <div
-                    class='thumbnail'
-                    style='width: {{ post.data.thumbnail.width }}px; height: {{ post.data.thumbnail.height }}px;'
-                >
-                    {{ post.data.thumbnail.display }}
-                </div>
-            {% else %}
-                <img
-                    class='thumbnail'
-                    src='/images/artworks/{{ post.data.thumbnail.image }}'
-                    width='{{ post.data.thumbnail.width }}'
-                    height='{{ post.data.thumbnail.height }}'
-                    loading='lazy'
-                >
-            {% endif %}
+            <a href='/posts/{{ post.data.id }}/' class='thumbnail'>
+                {% if post.data.category == 'textonly' %}
+                    <div
+                        class='textonly'
+                        style='width: {{ post.data.thumbnail.width }}px; height: {{ post.data.thumbnail.height }}px;'
+                    >
+                        {{ post.data.thumbnail.display }}
+                    </div>
+                {% else %}
+                    <img
+                        src='/images/artworks/{{ post.data.thumbnail.image }}'
+                        width='{{ post.data.thumbnail.width }}'
+                        height='{{ post.data.thumbnail.height }}'
+                        loading='lazy'
+                    >
+                {% endif %}
+            </a>
 
             <p>{{ post.data.text }}</p>
         </section>

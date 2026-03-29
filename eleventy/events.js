@@ -10,18 +10,9 @@ export default {
         fs.mkdirSync(outputDir, { recursive: true });
 
         posts.forEach((post) => {
-            switch (post.data.category) {
-                case 'fanart':
-                case 'original':
-                case 'study':
-                    resizeImage(post, inputDir, outputDir);
-                    resizeThumbnail(post, inputDir, outputDir);
-                    break;
-
-                case 'doodle':
-                    resizeThumbnail(post, inputDir, outputDir);
-                    break;
-            }
+            if (post.data.category == 'textonly') return;
+            resizeImage(post, inputDir, outputDir);
+            resizeThumbnail(post, inputDir, outputDir);
         });
     },
 };

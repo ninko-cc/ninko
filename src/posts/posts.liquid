@@ -1,0 +1,23 @@
+---
+layout: body.liquid
+css: './src/posts/posts.css'
+pagination:
+    data: collections.posts
+    size: 1
+    alias: post
+permalink: '/posts/{{ pagination.pageNumber | plus: 1 }}/index.html'
+---
+<h1>
+    {{ post.data.title }}
+    <small>{{ post.data.category | capitalize }} / {{ post.date | date: '%Y-%m-%d' }}</small>
+</h1>
+
+{% if post.data.category != 'textonly' %}
+    <img
+        width='{{ post.data.width }}'
+        height='{{ post.data.height }}'
+        src='/images/artworks/{{ post.data.image }}'
+    >
+{% endif %}
+
+<p>{{ post.data.text }}</p>

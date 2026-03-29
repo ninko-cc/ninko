@@ -14,7 +14,7 @@ permalink: atom.xml
             <id>tag:ninko.cc,2025:{{ post.data.id }}</id>
             <title>{{ post.data.rss.title }}</title>
             <updated>{{ post.date | iso8601 }}</updated>
-            <link rel='alternate' href='{{ 'https://ninko.cc' | append: post.data.path }}' />
+            <link rel='alternate' href='https://ninko.cc/posts/{{ post.data.id }}/' />
         </entry>
     {% endfor %}
 </feed>

@@ -1,8 +1,6 @@
-function highlight() {
-    const id = location.hash.slice(1);
-    document.querySelector('.highlight')?.classList.remove('highlight');
-    document.querySelector(`[id="${id}"]`)?.classList.add('highlight');
-}
-
-window.addEventListener('hashchange', highlight);
-window.addEventListener('DOMContentLoaded', highlight);
+document.querySelectorAll('section img').forEach((img) => {
+    img.onload = () => {
+        const html = `<link rel="prefetch" href="${img.src.replace('_thumbnail', '')}">`;
+        document.head.insertAdjacentHTML('beforeend', html);
+    };
+});

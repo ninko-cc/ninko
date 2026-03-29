@@ -9,14 +9,16 @@ js: './src/gallery/gallery.js'
 </h1>
 
 <section>
-    {% for art in collections.artworks reversed %}
-        <a href='/artworks/{{ art.data.artwork.id }}/'>
-            <img
-                src='/images/artworks/{{ art.data.thumbnail.image }}'
-                width='{{ art.data.thumbnail.width }}'
-                height='{{ art.data.thumbnail.height }}'
-                loading='lazy'
-            >
-        </a>
+    {% for post in collections.posts reversed %}
+        {% if post.data.gallery %}
+            <a href='/posts/{{ post.data.id }}/'>
+                <img
+                    src='/images/artworks/{{ post.data.thumbnail.image }}'
+                    width='{{ post.data.thumbnail.width }}'
+                    height='{{ post.data.thumbnail.height }}'
+                    loading='lazy'
+                >
+            </a>
+        {% endif %}
     {% endfor %}
 </section>

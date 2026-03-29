@@ -13,10 +13,11 @@ export default {
             return head.length == length ? head.slice(0, -1) + '…' : head;
         },
         thumbnail: (data) => {
+            const width = 300;
             return {
                 image: data.image.replace(/(\.[^.]+)$/, '_thumbnail$1'),
-                width: 300,
-                height: data.tags.includes('artworks') ? 375 : 300,
+                width: width,
+                height: width * (data.height / data.width),
                 quality: 70,
                 animated: data.animated,
                 signature: false,

@@ -23,18 +23,10 @@ export default (config) => {
 
     config.addCollection('posts', function (api) {
         posts = api.getFilteredByTag('posts').map((item, index) => {
-            item.data.id = index;
-            item.data.path = `/home/#${index}`;
+            item.data.id = index + 1;
             return item;
         });
         return posts;
-    });
-
-    config.addCollection('artworks', function (api) {
-        return api.getFilteredByTag('artworks').map((item, index) => {
-            item.data.artwork = { id: index };
-            return item;
-        });
     });
 
     config.addTransform('HTML圧縮', transforms.minifyHTML);

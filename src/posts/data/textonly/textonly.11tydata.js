@@ -1,5 +1,6 @@
 export default {
     category: 'textonly',
+    gallery: false,
     eleventyComputed: {
         rss: (data) => ({ title: data.title }),
         thumbnail: (data) => {

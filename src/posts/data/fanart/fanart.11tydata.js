@@ -1,6 +1,6 @@
 export default {
     category: 'fanart',
-    tags: ['artworks'],
+    gallery: true,
     eleventyComputed: {
         text: (data) => `Fan art of ${data.title}.`,
         rss: (data) => ({ title: `Fan art of ${data.title}` }),

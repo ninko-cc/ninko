@@ -14,9 +14,6 @@
             "binding": "DB"
         }
     ],
-    "vars": {
-        "CF_TEAM": "ninko-cc"
-    },
     "workers_dev": false,
     "preview_urls": false,
     "observability": {

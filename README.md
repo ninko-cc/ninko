@@ -23,7 +23,7 @@ $ npx wrangler d1 execute ninko-logs --remote --file ./sql/create-table.sql
 > Run the following command to exclude your own accesses from the logs (optional)
 
 ```
-$ npx wrangler secret put CF_AUD
+$ openssl rand -hex 32 | npx wrangler secret put NINKO_AUTH_TOKEN
 ```
 
 ## Usage

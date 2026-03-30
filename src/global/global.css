@@ -2,7 +2,6 @@
     --black: #26251d;
     --white: #ffffff;
     --lightgray: #fafafa;
-    --ivory: #fffff0;
     --gold: #ccc4a2;
     --brown: #4f4f2f;
     --navy: #223a70;
@@ -74,6 +73,14 @@ th {
 
 th::after {
     content: ':';
+}
+
+.textonly {
+    text-align: center;
+    align-content: center;
+    text-decoration: none;
+    color: var(--brown);
+    background-color: var(--white);
 }
 
 @scope (nav.main) {

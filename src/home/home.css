@@ -20,13 +20,6 @@
             margin-right: 1rem;
             cursor: pointer;
         }
-
-        .textonly {
-            text-align: center;
-            align-content: center;
-            color: var(--gold);
-            background-color: var(--black);
-        }
     }
 
     nav {
@@ -34,8 +27,7 @@
         gap: 0.5em;
     }
 
-    .highlight {
-        color: var(--black);
-        background-color: var(--ivory);
+    .post > a {
+        text-decoration: none;
     }
 }

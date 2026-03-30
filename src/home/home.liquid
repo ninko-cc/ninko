@@ -28,9 +28,9 @@ pagination:
                 {% if post.data.category == 'textonly' %}
                     <div
                         class='textonly'
-                        style='width: {{ post.data.thumbnail.width }}px; height: {{ post.data.thumbnail.height }}px;'
+                        style='width:{{ post.data.thumbnail.width }}px;height:{{ post.data.thumbnail.height }}px;'
                     >
-                        {{ post.data.thumbnail.display }}
+                        {{ post.data.display }}
                     </div>
                 {% else %}
                     <img

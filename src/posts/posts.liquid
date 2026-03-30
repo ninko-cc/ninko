@@ -12,7 +12,14 @@ permalink: '/posts/{{ pagination.pageNumber | plus: 1 }}/index.html'
     <small>{{ post.data.category | capitalize }} / {{ post.date | date: '%Y-%m-%d' }}</small>
 </h1>
 
-{% if post.data.category != 'textonly' %}
+{% if post.data.category == 'textonly' %}
+    <div
+        class='textonly'
+        style='width:{{ post.data.width }}px;height:{{ post.data.height }}px;'
+    >
+        {{ post.data.display }}
+    </div>
+{% else %}
     <img
         width='{{ post.data.width }}'
         height='{{ post.data.height }}'

@@ -24,11 +24,10 @@ export default class {
     }
 
     async get(limit, offset) {
-        const query = 'SELECT * FROM access_logs ORDER BY accessed_at DESC LIMIT ? OFFSET ?';
-
-        const { results: rows } = await this.db.prepare(query).bind(limit, offset).all();
-        const { results: count } = await this.db.prepare('SELECT COUNT(*) as total FROM access_logs').all();
-
+        const [{ results: rows }, { results: count }] = await this.db.batch([
+            this.db.prepare('SELECT * FROM access_logs ORDER BY accessed_at DESC LIMIT ? OFFSET ?').bind(limit, offset),
+            this.db.prepare('SELECT COUNT(*) as total FROM access_logs'),
+        ]);
         return { rows, total: count[0].total };
     }
 }

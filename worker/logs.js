@@ -11,7 +11,7 @@ export default class {
         await this.db
             .prepare(query)
             .bind(
-                new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().replace('Z', '+09:00'),
+                new Date().toISOString(),
                 new URL(request.url).pathname,
                 request.headers.get('CF-Connecting-IP'),
                 request.cf?.region,

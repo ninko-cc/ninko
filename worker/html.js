@@ -12,8 +12,10 @@ export function renderHTML(rows, pageNumber, totalPages) {
 }
 
 function tr(row) {
-    const date = row.accessed_at.slice(2, 10).replaceAll('-', '/');
-    const time = row.accessed_at.slice(11, 19);
+    const jst = new Date(new Date(row.accessed_at).getTime() + 9 * 60 * 60 * 1000);
+    const iso = jst.toISOString();
+    const date = iso.slice(2, 10).replaceAll('-', '/');
+    const time = iso.slice(11, 19);
     const ua = new UAParser(row.ua);
     const os = ua.getOS()?.name ?? 'Unknown';
     const browser = ua.getBrowser()?.name?.replace(' ', '') ?? 'Unknown';

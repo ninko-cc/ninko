@@ -28,6 +28,11 @@ body > header {
     margin: 0 1rem;
 }
 
+main {
+    grid-column: 2 / 3;
+    padding: 1rem 2rem;
+}
+
 footer {
     display: flex;
     flex-direction: column;
@@ -65,16 +70,6 @@ h2 {
     font-size: 1.5rem;
 }
 
-th {
-    text-align: left;
-    font-weight: 400;
-    padding-right: 0.5em;
-}
-
-th::after {
-    content: ':';
-}
-
 .textonly {
     text-align: center;
     align-content: center;
@@ -91,32 +86,26 @@ th::after {
         grid-column: 1 / 2;
         grid-row: 2 / 4;
         margin-top: 1.5rem;
-        padding-top: 2.5rem;
+        padding: 2.5rem 1em 0 1em;
         font-size: 1.1em;
         border-right: 1px solid var(--gold);
     }
 
-    @scope (section) {
-        :scope {
-            margin: 0 1em;
-        }
+    header {
+        text-align: center;
+        border-bottom: 1px solid var(--gold);
+        padding-bottom: 0.5em;
+    }
 
-        header {
-            text-align: center;
-            border-bottom: 1px solid var(--gold);
-            padding-bottom: 0.5em;
-        }
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0.5em 0;
+    }
 
-        ul {
-            display: grid;
-            justify-content: center;
-            gap: 1rem;
-            padding: 0.5em 0;
-        }
-
-        li::marker {
-            content: '';
-        }
+    li::marker {
+        content: '';
     }
 
     .menu {
@@ -128,16 +117,9 @@ th::after {
             font-size: 0.9em;
         }
 
-        a {
-            margin-left: 0.25em;
+        .date {
+            margin-right: 0.25em;
         }
-    }
-}
-
-@scope (main) {
-    :scope {
-        grid-column: 2 / 3;
-        padding: 1rem 2rem;
     }
 }
 

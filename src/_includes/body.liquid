@@ -3,8 +3,8 @@ layout: base.liquid
 scale: 0.5
 ---
 <body>
-    <header class='main'>忍狐のホームページ</header>
-    <nav class='main'>
+    <header>忍狐のホームページ</header>
+    <nav>
         <section class='menu'>
             <header>Menu</header>
             <ul>
@@ -20,8 +20,8 @@ scale: 0.5
                 {% assign posts = collections.posts | reverse %}
                 {% for post in posts limit: 5 %}
                     <li>
-                        <span>{{ post.date | date: '%m/%d' }}</span>
-                        <a href='/posts/{{ post.data.id }}'>{{ post.data.head }}</a>
+                        {{ post.date | date: '%m/%d' }}
+                        <a href='/posts/{{ post.data.id }}' class='head'>{{ post.data.head }}</a>
                     </li>
                 {% endfor %}
             </ul>

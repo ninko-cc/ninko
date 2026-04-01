@@ -1,5 +1,5 @@
 @scope (main) {
-    @scope (section.post) {
+    @scope (.post) {
         :scope {
             display: grid;
             grid-template-columns: auto 1fr;
@@ -25,9 +25,5 @@
     nav {
         display: flex;
         gap: 0.5em;
-    }
-
-    .post > a {
-        text-decoration: none;
     }
 }

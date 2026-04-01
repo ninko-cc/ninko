@@ -19,7 +19,7 @@ body {
     background-color: var(--lightgray);
 }
 
-header.main {
+body > header {
     grid-column: 1 / 3;
     text-align: center;
     align-content: center;
@@ -83,7 +83,7 @@ th::after {
     background-color: var(--white);
 }
 
-@scope (nav.main) {
+@scope (body > nav) {
     :scope {
         display: flex;
         flex-direction: column;
@@ -96,21 +96,6 @@ th::after {
         border-right: 1px solid var(--gold);
     }
 
-    ul {
-        display: grid;
-        justify-content: center;
-        gap: 1rem;
-        padding: 0.5em 0;
-    }
-
-    li::marker {
-        content: '';
-    }
-
-    section.menu {
-        text-align: center;
-    }
-
     @scope (section) {
         :scope {
             margin: 0 1em;
@@ -121,20 +106,30 @@ th::after {
             border-bottom: 1px solid var(--gold);
             padding-bottom: 0.5em;
         }
-    }
 
-    @scope (section.updates) {
-        li {
-            font-size: 0.9em;
-            display: -webkit-box;
-            line-clamp: 2;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        ul {
+            display: grid;
+            justify-content: center;
+            gap: 1rem;
+            padding: 0.5em 0;
         }
 
-        li > span {
-            margin-right: 0.25em;
+        li::marker {
+            content: '';
+        }
+    }
+
+    .menu {
+        text-align: center;
+    }
+
+    @scope (.updates) {
+        li {
+            font-size: 0.9em;
+        }
+
+        a {
+            margin-left: 0.25em;
         }
     }
 }
@@ -144,26 +139,10 @@ th::after {
         grid-column: 2 / 3;
         padding: 1rem 2rem;
     }
-
-    ul {
-        padding-left: 1rem;
-    }
-
-    ul:has(ul) {
-        display: grid;
-        gap: 1rem;
-    }
 }
 
 @media screen and (max-width: 1279px) {
     body {
         width: 100%;
-    }
-
-    @scope (section.updates) {
-        li {
-            line-clamp: 3;
-            -webkit-line-clamp: 3;
-        }
     }
 }

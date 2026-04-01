@@ -1,23 +1,25 @@
-@scope (.container) {
-    :scope {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-    }
+@scope (main) {
+    @scope (.container) {
+        :scope {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
 
-    div {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        gap: 2rem;
-    }
+        div {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
 
-    img {
-        object-fit: contain;
-        object-position: left;
-    }
+        img {
+            object-fit: contain;
+            object-position: left;
+        }
 
-    h2 {
-        margin-top: 0;
+        h2 {
+            margin-top: 0;
+        }
     }
 }

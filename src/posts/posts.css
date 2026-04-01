@@ -1,5 +1,5 @@
-@media screen and (max-width: 1279px) {
-    @scope (main) {
+@scope (main) {
+    @media screen and (max-width: 1279px) {
         img {
             max-width: 100%;
             object-fit: contain;

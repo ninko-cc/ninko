@@ -1,10 +1,15 @@
+import path from 'path';
 import shortcodes from './eleventy/shortcodes.js';
 import filters from './eleventy/filters.js';
 import transforms from './eleventy/transforms.js';
 import events from './eleventy/events.js';
 
+const ARTWORKS_DIR = './images/artworks';
+const SIGNATURE_FILE = './images/signature/20260314_signature.webp';
+
 export default (config) => {
     config.setInputDirectory('src');
+    config.setOutputDirectory('_site');
 
     config.addWatchTarget('src/**/*.css');
     config.addWatchTarget('src/**/*.js');
@@ -19,6 +24,10 @@ export default (config) => {
 
     config.addFilter('iso8601', filters.iso8601);
 
+    config.addTransform('HTML圧縮', transforms.minifyHTML);
+    config.addTransform('XML圧縮', transforms.minifyXML);
+    config.addTransform('JSON圧縮', transforms.minifyJSON);
+
     let posts;
 
     config.addCollection('posts', function (api) {
@@ -29,12 +38,8 @@ export default (config) => {
         return posts;
     });
 
-    config.addTransform('HTML圧縮', transforms.minifyHTML);
-    config.addTransform('XML圧縮', transforms.minifyXML);
-    config.addTransform('JSON圧縮', transforms.minifyJSON);
-
-    config.on('eleventy.after', async ({ directories }) => {
-        events.after(directories, posts);
+    config.on('eleventy.after', async ({ directories: { output } }) => {
+        events.after.downscale(ARTWORKS_DIR, path.join(output, ARTWORKS_DIR), SIGNATURE_FILE, posts);
     });
 
     if (process.env.CACHE_ENABLED === 'true') {

@@ -1,18 +1,35 @@
 import fs from 'fs';
 import path from 'path';
-import { resizeImage, resizeThumbnail } from './resize.js';
+import downscale from './downscale.js';
 
 export default {
-    after(directories, posts) {
-        const inputDir = './images/artworks';
-        const outputDir = path.join(directories.output, inputDir);
+    after: {
+        downscale(inputDir, outputDir, signatureFile, posts) {
+            fs.mkdirSync(outputDir, { recursive: true });
 
-        fs.mkdirSync(outputDir, { recursive: true });
+            posts.forEach((post) => {
+                if (!post.data.downscale) return;
 
-        posts.forEach((post) => {
-            if (post.data.category == 'textonly') return;
-            resizeImage(post, inputDir, outputDir);
-            resizeThumbnail(post, inputDir, outputDir);
-        });
+                downscale(
+                    path.join(inputDir, post.data.image),
+                    path.join(outputDir, post.data.image),
+                    post.data.width,
+                    post.data.height,
+                    post.data.quality,
+                    post.data.animated,
+                    post.data.signature && signatureFile,
+                );
+
+                downscale(
+                    path.join(inputDir, post.data.image),
+                    path.join(outputDir, post.data.thumbnail.image),
+                    post.data.thumbnail.width,
+                    post.data.thumbnail.height,
+                    post.data.thumbnail.quality,
+                    post.data.thumbnail.animated,
+                    post.data.thumbnail.signature && signatureFile,
+                );
+            });
+        },
     },
 };

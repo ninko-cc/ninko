@@ -3,10 +3,11 @@ export default {
     title: 'Untitled',
     width: 500,
     height: 500,
+    gallery: false,
+    downscale: true,
     quality: 80,
     animated: false,
     signature: false,
-    gallery: false,
     eleventyComputed: {
         rss: (data) => {
             const formatter = new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' });

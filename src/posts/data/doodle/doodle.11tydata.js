@@ -3,6 +3,9 @@ export default {
     title: 'Untitled',
     width: 500,
     height: 500,
+    quality: 80,
+    animated: false,
+    signature: false,
     gallery: false,
     eleventyComputed: {
         rss: (data) => {

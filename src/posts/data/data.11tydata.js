@@ -1,11 +1,6 @@
 export default {
     tags: ['posts'],
     permalink: false,
-    width: 640,
-    height: 800,
-    quality: 80,
-    animated: false,
-    signature: true,
     eleventyComputed: {
         head: (data) => {
             const length = 30;
@@ -15,7 +10,7 @@ export default {
         thumbnail: (data) => {
             const width = 300;
             return {
-                image: data.image.replace(/(\.[^.]+)$/, '_thumbnail$1'),
+                image: data.image?.replace(/(\.[^.]+)$/, '_thumbnail$1'),
                 width: width,
                 height: width * (data.height / data.width),
                 quality: 70,

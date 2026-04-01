@@ -1,16 +1,13 @@
 export default {
     category: 'textonly',
-    gallery: false,
+    display: 'TEXT ONLY',
+    image: null,
     width: 300,
     height: 300,
-    display: 'TEXT ONLY',
+    animated: false,
+    signature: false,
+    gallery: false,
     eleventyComputed: {
         rss: (data) => ({ title: data.title }),
-        thumbnail: () => {
-            return {
-                width: 300,
-                height: 300,
-            };
-        },
     },
 };
